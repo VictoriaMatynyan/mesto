@@ -7,6 +7,7 @@
     <meta name="description" content="Интерактивная страница для добавления фотографий, их удаления и лайков">
     <meta name="keyword" content="html, css, grid, grid-layout, javascript, adaptive web design, responsive web design">
     <meta name="author" content="Виктория Матынян">
+    <link rel="stylesheet" href="./pages/index.css">
     <title>Mesto Russia</title>
 </head>
 <body class="page">
@@ -17,29 +18,63 @@
         <section class="profile">
             <img src="./images/avatar.png" alt="Аватар профиля" class="profile__avatar">
             <div class="profile__info">
-                <h1 class="profile__name"></h1>
-                <p class="profile__description"></p>
-                <button class="edit-button"></button>
+                <h1 class="profile__name">Жак-Ив Кусто</h1>
+                <p class="profile__description">Исследователь океана</p>
+                <button class="edit-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.5" y="0.5" width="23" height="23" stroke="white"/>
+                        <path d="M17 8.32827L9.60377 15.7666L8.28302 14.4194L15.6604 7L17 8.32827ZM7 17L8.96226 16.4118L7.58491 15.0835L7 17Z" fill="white"/>
+                    </svg>                        
+                </button>
             </div>
-            <button class="add-button"></button>
+            <button class="add-button">
+                <svg width="150" height="50" viewBox="0 0 150 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="1" width="148" height="48" rx="1" stroke="white" stroke-width="2"/>
+                    <path d="M86 23.7778H76.2222V14H73.7778V23.7778H64V26.2222H73.7778V36H76.2222V26.2222H86V23.7778Z" fill="white"/>
+                </svg>                    
+            </button>
         </section>
         <section class="elements">
-            <figure class="elements__element">
-                <img src="" alt="" class="element__image">
-                <figcaption class="element__caption"></figcaption>
+            <figure class="element">
+                <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="element__image">
+                <figcaption class="element__caption">Карачаевск
+                    <svg class="element__like" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 19"><path fill="#000" d="M20.3 9.786c2.267-2.243 2.267-5.884 0-8.104-2.269-2.243-5.951-2.243-8.22 0l-1.1 1.11-1.1-1.088C7.612-.56 3.93-.56 1.684 1.682A5.657 5.657 0 0 0 0 5.745a5.75 5.75 0 0 0 1.684 4.063L10.98 19l9.32-9.214ZM1.436 5.745c0-1.155.45-2.22 1.28-3.02A4.33 4.33 0 0 1 5.771 1.46c1.1 0 2.2.422 3.054 1.265l2.155 2.11 2.156-2.132c1.684-1.665 4.446-1.665 6.108 0 .808.8 1.28 1.865 1.28 3.02 0 1.154-.45 2.22-1.28 3.02l-8.264 8.192-8.263-8.17c-.808-.822-1.28-1.888-1.28-3.02Z"/></svg>
+                </figcaption>
             </figure>
-            <figure class="elements__element">
-                <img src="" alt="" class="element__image">
-                <figcaption class="element__caption"></figcaption>
+            <figure class="element">
+                <img src="./images/Elbrus.jpg" alt="Эльбрус" class="element__image">
+                <figcaption class="element__caption">Гора Эльбрус
+                    <svg class="element__like" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 19"><path fill="#000" d="M20.3 9.786c2.267-2.243 2.267-5.884 0-8.104-2.269-2.243-5.951-2.243-8.22 0l-1.1 1.11-1.1-1.088C7.612-.56 3.93-.56 1.684 1.682A5.657 5.657 0 0 0 0 5.745a5.75 5.75 0 0 0 1.684 4.063L10.98 19l9.32-9.214ZM1.436 5.745c0-1.155.45-2.22 1.28-3.02A4.33 4.33 0 0 1 5.771 1.46c1.1 0 2.2.422 3.054 1.265l2.155 2.11 2.156-2.132c1.684-1.665 4.446-1.665 6.108 0 .808.8 1.28 1.865 1.28 3.02 0 1.154-.45 2.22-1.28 3.02l-8.264 8.192-8.263-8.17c-.808-.822-1.28-1.888-1.28-3.02Z"/></svg>
+                </figcaption>
             </figure>
-            <figure class="elements__element">
-                <img src="" alt="" class="element__image">
-                <figcaption class="element__caption"></figcaption>
+            <figure class="element">
+                <img src="./images/Dombay.jpg" alt="Домбай" class="element__image">
+                <figcaption class="element__caption">Домбай
+                    <svg class="element__like" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 19"><path fill="#000" d="M20.3 9.786c2.267-2.243 2.267-5.884 0-8.104-2.269-2.243-5.951-2.243-8.22 0l-1.1 1.11-1.1-1.088C7.612-.56 3.93-.56 1.684 1.682A5.657 5.657 0 0 0 0 5.745a5.75 5.75 0 0 0 1.684 4.063L10.98 19l9.32-9.214ZM1.436 5.745c0-1.155.45-2.22 1.28-3.02A4.33 4.33 0 0 1 5.771 1.46c1.1 0 2.2.422 3.054 1.265l2.155 2.11 2.156-2.132c1.684-1.665 4.446-1.665 6.108 0 .808.8 1.28 1.865 1.28 3.02 0 1.154-.45 2.22-1.28 3.02l-8.264 8.192-8.263-8.17c-.808-.822-1.28-1.888-1.28-3.02Z"/></svg>
+                </figcaption>
+            </figure>
+            <figure class="element">
+                <img src="./images/Dombay.jpg" alt="Исландия" class="element__image">
+                <figcaption class="element__caption">Исландия
+                    <svg class="element__like" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 19"><path fill="#000" d="M20.3 9.786c2.267-2.243 2.267-5.884 0-8.104-2.269-2.243-5.951-2.243-8.22 0l-1.1 1.11-1.1-1.088C7.612-.56 3.93-.56 1.684 1.682A5.657 5.657 0 0 0 0 5.745a5.75 5.75 0 0 0 1.684 4.063L10.98 19l9.32-9.214ZM1.436 5.745c0-1.155.45-2.22 1.28-3.02A4.33 4.33 0 0 1 5.771 1.46c1.1 0 2.2.422 3.054 1.265l2.155 2.11 2.156-2.132c1.684-1.665 4.446-1.665 6.108 0 .808.8 1.28 1.865 1.28 3.02 0 1.154-.45 2.22-1.28 3.02l-8.264 8.192-8.263-8.17c-.808-.822-1.28-1.888-1.28-3.02Z"/></svg>
+                </figcaption>
+            </figure>
+            <figure class="element">
+                <img src="./images/Dombay.jpg" alt="Фарерские острова" class="element__image">
+                <figcaption class="element__caption">Фарерские острова
+                    <svg class="element__like" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 19"><path fill="#000" d="M20.3 9.786c2.267-2.243 2.267-5.884 0-8.104-2.269-2.243-5.951-2.243-8.22 0l-1.1 1.11-1.1-1.088C7.612-.56 3.93-.56 1.684 1.682A5.657 5.657 0 0 0 0 5.745a5.75 5.75 0 0 0 1.684 4.063L10.98 19l9.32-9.214ZM1.436 5.745c0-1.155.45-2.22 1.28-3.02A4.33 4.33 0 0 1 5.771 1.46c1.1 0 2.2.422 3.054 1.265l2.155 2.11 2.156-2.132c1.684-1.665 4.446-1.665 6.108 0 .808.8 1.28 1.865 1.28 3.02 0 1.154-.45 2.22-1.28 3.02l-8.264 8.192-8.263-8.17c-.808-.822-1.28-1.888-1.28-3.02Z"/></svg>
+                </figcaption>
+            </figure>
+            <figure class="element">
+                <img src="./images/Dombay.jpg" alt="Ирландия" class="element__image">
+                <figcaption class="element__caption">Ирландия
+                    <svg class="element__like" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 19"><path fill="#000" d="M20.3 9.786c2.267-2.243 2.267-5.884 0-8.104-2.269-2.243-5.951-2.243-8.22 0l-1.1 1.11-1.1-1.088C7.612-.56 3.93-.56 1.684 1.682A5.657 5.657 0 0 0 0 5.745a5.75 5.75 0 0 0 1.684 4.063L10.98 19l9.32-9.214ZM1.436 5.745c0-1.155.45-2.22 1.28-3.02A4.33 4.33 0 0 1 5.771 1.46c1.1 0 2.2.422 3.054 1.265l2.155 2.11 2.156-2.132c1.684-1.665 4.446-1.665 6.108 0 .808.8 1.28 1.865 1.28 3.02 0 1.154-.45 2.22-1.28 3.02l-8.264 8.192-8.263-8.17c-.808-.822-1.28-1.888-1.28-3.02Z"/></svg>
+                </figcaption>
             </figure>
         </section>
     </main>
     <footer class="footer">
-        <p class="footer__copyright">&nbsp;2023. Виктория Матынян</p>
+        <p class="footer__copyright">&copy;2023. Виктория Матынян</p>
     </footer>
     <script src="./script.js"></script>
 </body>
