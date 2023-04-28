@@ -1,9 +1,11 @@
 @import url(../vendor/normalize.css);
+@import url(../vendor/fonts/inter.css);
 
 .page {
     max-width: 1280px;
     background-color: #000;
     margin: 0 auto;
+    padding: 0;
     font-family: 'Inter', 'Arial', sans-serif;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100;
@@ -11,17 +13,17 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 .header {
-    max-width: 880px;
+    max-width: calc(100% - 400px);
     padding: 45px 0 41px;
     margin: 0 auto;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-sizing: border-box;
     border-bottom: 1px solid #545454;
 }
 
@@ -30,15 +32,16 @@
 }
 
 .content {
-    max-width: 880px;
-    padding: 40px 0;
-    margin: 0 auto;
-    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 .profile {
-    width: 100%;
+    max-width: calc(100% - 400px);
+    padding-top: 40px;
+    margin: 0 auto;
     display: flex;
+    position: relative;
 }
 
 .profile__avatar {
@@ -49,65 +52,197 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     object-fit: cover;
+    z-index: 150;
 }
 
 .profile__info {
     padding-left: 30px;
     color: #fff;
     display: grid;
-    grid-template: repeat(2, max-content) / max-content fit-content(24px);
-    grid-template-areas: 
-    "profile_name button_edit"
-    "profile_description .";
+    grid-template-columns: 1fr 24px;
     row-gap: 16px;
     column-gap: 18px;
     align-self: center;
 }
 
 .profile__name {
-    grid-area: profile_name;
     font-size: 42px;
     line-height: 48px;
     font-weight: 500;
     margin: 0;
+    z-index: 150;
 }
 
 .profile__description {
-    grid-area: profile_description;
     font-size: 18px;
     line-height: 1.21;
     font-weight: 400;
     margin: 0;
+    text-overflow: ellipsis;
+    z-index: 150;
 }
 
-.edit-button {
-    grid-area: button_edit;
+.profile__edit-button {
+    max-width: 24px;
     background-color: #000;
-    border: none;
     align-self: center;
     padding: 0;
+    z-index: 150;
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+    -webkit-transition: opacity 0.3s ease-in;
+    -moz-transition: opacity 0.3s ease-in;
+    -ms-transition: opacity 0.3s ease-in;
+    -o-transition: opacity 0.3s ease-in;
+    cursor: pointer;
+}
+
+.profile__edit-button:hover {
+    opacity: 0.6;
 }
 
 .add-button {
-    justify-self: end;
+    max-width: 150px;
+    position: absolute;
+    right: 0;
+    align-self: center;
     background-color: #000;
-    border: none;
     padding: 0 0 0 244px;
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+    -webkit-transition: opacity 0.3s ease-in;
+    -moz-transition: opacity 0.3s ease-in;
+    -ms-transition: opacity 0.3s ease-in;
+    -o-transition: opacity 0.3s ease-in;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    opacity: 0.6;
+}
+
+.popup {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 350;
+    display: none;
+}
+
+.popup__container {
+    width: 33.6vw;
+    max-width: 430px;
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    margin: 195px auto 0;
+    position: relative;
+    color: #000;
+    box-sizing: border-box;
+    padding: 34px 36px 37px;
+}
+
+.popup__close-sign {
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    max-width: 32px;
+    transition: opacity 0.3s ease-in;
+    -webkit-transition: opacity 0.3s ease-in;
+    -moz-transition: opacity 0.3s ease-in;
+    -ms-transition: opacity 0.3s ease-in;
+    -o-transition: opacity 0.3s ease-in;
+    cursor: pointer;
+}
+
+.popup__close-sign:hover {
+    opacity: 0.6;
+}
+
+.popup__header {
+    margin: 0;
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: 900;
+}
+
+.popup__input-container {
+    max-width: 358px;
+    padding: 54px 0 0;
+    margin: 0;
+    border: none;
+}
+
+.popup__input {
+    width: 100%;
+    border: none;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0 0 13px;
+    position: relative;
+}
+
+.popup__input:first-of-type {
+    margin-bottom: 30px;
+}
+
+.popup__input::-webkit-input-placeholder {
+    color: #000;
+}
+
+.popup__input:-ms-input-placeholder{ 
+    color: #000;
+}
+
+.popup__submit-button {
+    margin: 48px 0 auto;
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border: none;
+    outline: none;
+    padding: 14px 124px 14px 125px;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+    -webkit-transition: opacity 0.3s ease-in;
+    -moz-transition: opacity 0.3s ease-in;
+    -ms-transition: opacity 0.3s ease-in;
+    -o-transition: opacity 0.3s ease-in;
+}
+
+.popup__submit-button:hover {
+    opacity: 0.8;
 }
 
 .elements {
-    max-width: 100%;
+    max-width: 880px;
+    margin: 0 auto;
     padding-top: 50px;
     display: grid;
-    grid-template: repeat(2, min-content) / repeat(3, 282px);
+    grid-template: repeat(2, 361px) / repeat(3, 282px); 
     column-gap: 17px;
     row-gap: 20px;
 }
 
 .element {
-    margin: 0 auto;
-    display: grid;
-    object-fit: contain;
+    max-width: 100%;
+    margin: 0;
     background-color: #fff;
     border-radius: 10px;
     -webkit-border-radius: 10px;
@@ -126,24 +261,43 @@
     object-fit: cover;
 }
 
+.element__text {
+    padding: 25px 15px 31px 21px;
+    display: flex;
+    justify-content: space-between;
+}
+
 .element__caption {
     font-size: 24px;
     line-height: 29.05px;
     font-weight: 900;
     color: #000;
-    padding: 25px 0 31px 21px;
-    display: flex;
-    justify-content: space-between;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0;
 }
 
-.element__like {
+.element__like-button {
     max-width: 22px;
-    padding-right: 15px;
+    padding-right: 5px;
+    transition: opacity 0.3s ease-in;
+    -webkit-transition: opacity 0.3s ease-in;
+    -moz-transition: opacity 0.3s ease-in;
+    -ms-transition: opacity 0.3s ease-in;
+    -o-transition: opacity 0.3s ease-in;
+    cursor: pointer;
+}
+
+.element__like-button:hover {
+    opacity: 0.5;
 }
 
 .footer {
-    max-width: 318px;
-    margin: 66px auto 60px 220px;
+    max-width: 880px;
+    margin: 0 auto;
+    padding-top: 66px;
+    padding-bottom: 60px;
     color: #545454;
     font-size: 18px;
     line-height: 22px;
