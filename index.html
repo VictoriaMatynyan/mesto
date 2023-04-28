@@ -16,16 +16,15 @@
     </header>
     <main class="content">
         <section class="profile">
-            <img src="./images/avatar.png" alt="Аватар профиля" class="profile__avatar">
-            <div class="profile__info">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <img src="./images/Edit_Button.png" alt="Кнопка редактирования" class="profile__edit-button">
-                <p class="profile__description">Исследователь океана</p>
+            <div class="profile__data">
+                <img src="./images/avatar.png" alt="Аватар профиля" class="profile__avatar">
+                <div class="profile__info">
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <button class="profile__edit-button"></button>
+                    <p class="profile__description">Исследователь океана</p>
+                </div>
             </div>
-            <svg class="add-button" viewBox="0 0 150 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="1" y="1" width="148" height="48" rx="1" stroke="white" stroke-width="2"/>
-                <path d="M86 23.7778H76.2222V14H73.7778V23.7778H64V26.2222H73.7778V36H76.2222V26.2222H86V23.7778Z" fill="white"/>
-            </svg>                    
+            <button type="button" class="add-button"></button>                    
         </section>
         <div class="popup">
             <div class="popup__container">
@@ -86,6 +85,6 @@
     <footer class="footer">
         <p class="footer__copyright">&copy; 2023 Виктория Матынян</p>
     </footer>
-    <!-- <script src="./script.js"></script> -->
+    <script src="./scripts/index.js"></script>
 </body>
 </html>
