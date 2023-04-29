@@ -1,0 +1,23 @@
+.element {
+    max-width: 100%;
+    margin: 0;
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+@media screen and (max-width: 879px) {
+    .element {
+        max-width: 32vw; 
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .element {
+        max-width: 282px;
+        justify-self: center;
+    }
+}
