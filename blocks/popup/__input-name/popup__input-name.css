@@ -1,4 +1,4 @@
-.popup__input {
+.popup__input-name {
     width: 100%;
     border: none;
     margin: 0 auto;
@@ -7,14 +7,14 @@
     position: relative;
 }
 
-.popup__input:first-of-type {
+.popup__input-name:first-of-type {
     margin-bottom: 30px;
 }
 
-.popup__input::-webkit-input-placeholder {
+.popup__input-name::-webkit-input-placeholder {
     color: #000;
 }
 
-.popup__input:-ms-input-placeholder{ 
+.popup__input-name:-ms-input-placeholder{ 
     color: #000;
 }
