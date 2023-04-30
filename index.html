@@ -8,7 +8,7 @@
     <meta name="keyword" content="html, css, grid, grid-layout, javascript, adaptive web design, responsive web design">
     <meta name="author" content="Виктория Матынян">
     <link rel="stylesheet" href="./pages/index.css">
-    <title>Mesto Russia</title>
+    <title lang="en">Mesto Russia</title>
 </head>
 <body class="page">
     <header class="header">
@@ -30,53 +30,53 @@
             <div class="popup__container">
                 <img src="./images/close_icon.png" alt="закрыть окно" class="popup__close-icon">
                 <h2 class="popup__header">Редактировать&nbsp;профиль</h2>
-                <fieldset class="popup__input-container">
+                <form class="popup__input-container">
                     <input type="text" placeholder="Жак-Ив Кусто" class="popup__input-name">
                     <input type="text" placeholder="Исследователь океана" class="popup__input-description">
-                </fieldset>
-                <button type="submit" class="popup__submit-button">Сохранить</button>
+                    <button type="submit" class="popup__submit-button">Сохранить</button>
+                </form>
             </div>
         </div>
-        <section class="elements">
+        <section class="elements" aria-label="Фотокарточки с подписью">
             <article class="element">
                 <img src="./images/canada.jpg" alt="Канада" class="element__image">
                 <div class="element__text">
-                    <p class="element__caption">Канада</p>
+                    <h2 class="element__caption">Канада</h2>
                     <button type="button" class="element__like-button element__like-button_active"></button>
                 </div>
             </article>
             <article class="element">
                 <img src="./images/ireland.jpg" alt="Ирландия" class="element__image">
                 <div class="element__text">
-                    <p class="element__caption">Ирландия</p>
+                    <h2 class="element__caption">Ирландия</h2>
                     <button type="button" class="element__like-button element__like-button_active"></button>
                 </div>
             </article>
             <article class="element">
                 <img src="./images/switzerland.jpg" alt="Швейцария" class="element__image">
                 <div class="element__text">
-                    <p class="element__caption">Швейцария</p>
+                    <h2 class="element__caption">Швейцария</h2>
                     <button type="button" class="element__like-button element__like-button_active"></button>
                 </div>
             </article>
             <article class="element">
                 <img src="./images/iceland.jpg" alt="Исландия" class="element__image">
                 <div class="element__text">
-                    <p class="element__caption">Исландия</p>
+                    <h2 class="element__caption">Исландия</h2>
                     <button type="button" class="element__like-button element__like-button_active"></button>
                 </div>
             </article>
             <article class="element">
                 <img src="./images/Faeroe_islands_quare.jpg" alt="Фарерские острова" class="element__image">
                 <div class="element__text">
-                    <p class="element__caption">Фарерские острова</p>
+                    <h2 class="element__caption">Фарерские острова</h2>
                     <button type="button" class="element__like-button element__like-button_active"></button>
                 </div>
             </article>
             <article class="element">
                 <img src="./images/machu_picchu.jpg" alt="Мачу-Пикчу" class="element__image">
                 <div class="element__text">
-                    <p class="element__caption">Мачу-Пикчу</p>
+                    <h2 class="element__caption">Мачу-Пикчу</h2>
                     <button type="button" class="element__like-button element__like-button_active"></button>
                 </div>
             </article>

@@ -6,4 +6,6 @@
     left: 0;
     z-index: 350;
     display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    ;
 }

@@ -1,8 +1,8 @@
 const popupButtonOpener = document.querySelector('.profile__popup-open');
 const popup = document.querySelector('.popup');
 const popupCloseSymbol = document.querySelector('.popup__close-icon');
-const togglePopupStatus = (popupIntoToggle) => popupIntoToggle.classList.toggle('popup__opened');
 
+const togglePopupStatus = (popupIntoToggle) => popupIntoToggle.classList.toggle('popup__opened');
 popupButtonOpener.addEventListener('click', () => togglePopupStatus(popup))
 
 popupCloseSymbol.addEventListener('click', () => togglePopupStatus(popup))
@@ -17,17 +17,23 @@ const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const popupInputName = document.querySelector('.popup__input-name');
 const popupInputDescription = document.querySelector('.popup__input-description');
-
-// popupInputName.textContent = "Жак-Ив Кусто";
-// popupInputDescription.textContent = "Исследователь океана";
-
-
 const submitButton = document.querySelector('.popup__submit-button');
-submitButton.addEventListener('click', function(){
+
+popupCloseSymbol.addEventListener('click', () => {
     const popupName = popupInputName.value;
     const popupDescription = popupInputDescription.value;
-    profileName.textContent = `${popupName}`;
-    profileDescription.textContent = `${popupDescription}`;
+    popupInputName.value = '';
+    popupInputDescription.value = '';
+    profileName.value = '';
+    profileDescription.value = '';
+});
+
+submitButton.addEventListener('click', () => {
+    const profileSubmitName = popupInputName.value;
+    const profileSubmitDescription = popupInputDescription.value;
+    profileName.textContent = profileSubmitName;
+    profileDescription.textContent = profileSubmitDescription;
+    togglePopupStatus(popup);
 })
 
 const likeButtons = document.querySelectorAll('.element__like-button');
@@ -38,3 +44,15 @@ likeButtons.forEach((likeButton) => {
     likeButton.classList.toggle('element__like-button')}
     );
 })
+
+const formElement = document.querySelector('.popup__input-container'); 
+
+function handleFormSubmit (evt) {
+    evt.preventDefault();
+    const nameInput = popupInputName.value;
+    const descriptionInput = popupInputDescription.value;
+    profileName.textContent = popupInputName.value;
+    profileDescription.textContent = popupInputDescription.value;
+}
+
+formElement.addEventListener('submit', handleFormSubmit);
