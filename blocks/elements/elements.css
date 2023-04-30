@@ -3,7 +3,7 @@
     margin: 0 auto;
     padding-top: 50px;
     display: grid;
-    grid-template: repeat(2, 361px) / repeat(3, 282px); 
+    grid-template: repeat(2, 361px) / repeat(3, 282px);
     column-gap: 17px;
     row-gap: 20px;
 }
