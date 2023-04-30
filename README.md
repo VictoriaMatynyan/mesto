@@ -1,17 +1,20 @@
-# Проект: Место
+# Project No.3: [Mesto](https://victoriamatynyan.github.io/mesto/)
 
-### Обзор
+## Review
 
-* Figma
-* Картинки
+This is my 2nd project realized during studying at [Yandex Praktikum](https://practicum.yandex.ru/) for web-developers.
+Mesto (or 'Place' in English) is performed as an interactive web page for posting pictures and gaining likes.
 
-**Figma**
+## Applied decisions in Project No.3:
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+* HTML and CSS coding;
+* JavaScript for popup realizing and for profile info manipulations;
+* BEM methodology in file structure (nested);
+* CSS Flexbox and Grid Layout;
+* pseudo-classes for CSS selectors;
+* CSS transition;
+* media queries for desctop and mobile versions (from 1280px to 320px).
 
-**Картинки**
+## Figma
 
-Доставать картинки предстоит из Фигмы. Это расхожая практика, поэтому полезно потренироваться.
-Не забудьте [оптимизировать картинки](https://tinypng.com/), чтобы ваш сайт загружался быстрее.
-
-Удачи!
+[Link](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1) for project reference in Figma.
