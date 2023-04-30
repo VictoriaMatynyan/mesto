@@ -18,6 +18,9 @@ const profileDescription = document.querySelector('.profile__description');
 const popupInputName = document.querySelector('.popup__input-name');
 const popupInputDescription = document.querySelector('.popup__input-description');
 
+// popupInputName.textContent = "Жак-Ив Кусто";
+// popupInputDescription.textContent = "Исследователь океана";
+
 
 const submitButton = document.querySelector('.popup__submit-button');
 submitButton.addEventListener('click', function(){
@@ -25,4 +28,13 @@ submitButton.addEventListener('click', function(){
     const popupDescription = popupInputDescription.value;
     profileName.textContent = `${popupName}`;
     profileDescription.textContent = `${popupDescription}`;
+})
+
+const likeButtons = document.querySelectorAll('.element__like-button');
+likeButtons.forEach((likeButton) => {
+    likeButton.classList.remove ('element__like-button_active');
+    likeButton.addEventListener('click', () => {
+    likeButton.classList.toggle('element__like-button_active'),
+    likeButton.classList.toggle('element__like-button')}
+    );
 })

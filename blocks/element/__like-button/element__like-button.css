@@ -4,20 +4,16 @@
     background-size: 100%;
     width: 22px;
     height: 19px;
-    transition: opacity 0.3s ease-in;
-    -webkit-transition: opacity 0.3s ease-in;
-    -moz-transition: opacity 0.3s ease-in;
-    -ms-transition: opacity 0.3s ease-in;
-    -o-transition: opacity 0.3s ease-in;
+    transition: opacity 0.3s ease;
+    -webkit-transition: opacity 0.3s ease;
+    -moz-transition: opacity 0.3s ease;
+    -ms-transition: opacity 0.3s ease;
+    -o-transition: opacity 0.3s ease;
     cursor: pointer;
     right: 15px;
+    opacity: 1;
 }
 
 .element__like-button:hover {
     opacity: 0.5;
-}
-
-.element__like-button_active:active {
-    background: url(../../../images/like_button_active.png) center no-repeat;
-    opacity: 1;
 }
