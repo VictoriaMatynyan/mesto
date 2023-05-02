@@ -1,5 +1,5 @@
 .element {
-    max-width: 100%;
+    width: 100%;
     margin: 0;
     background-color: #fff;
     border-radius: 10px;
@@ -9,15 +9,34 @@
     -o-border-radius: 10px;
 }
 
-@media screen and (max-width: 879px) {
+@media screen and (max-width: 918px) {
     .element {
-        max-width: 32vw; 
+        max-width: 30.72vw; 
     }
 }
+
 
 @media screen and (max-width: 700px) {
     .element {
         max-width: 282px;
         justify-self: center;
+    }
+}
+
+@media screen and (max-width: 622px) {
+    .element {
+        max-width: 45.3vw; 
+    }
+}
+
+@media screen and (max-width: 533px) {
+    .element {
+        max-width: 282px;
+    }
+}
+
+@media screen and (max-width: 319px) {
+    .element {
+        max-width: 80.4vw;
     }
 }

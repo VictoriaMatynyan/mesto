@@ -13,10 +13,12 @@
     color: #000;
     box-sizing: border-box;
     padding: 34px 36px 37px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 1);
 }
 
 @media screen and (max-width: 897px) {
     .popup__container {
         padding: 25px 22px;
+        margin-top: 123px;
     }
 }

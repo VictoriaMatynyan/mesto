@@ -4,3 +4,9 @@
     margin: 0;
     border: none;
 }
+
+@media screen and (max-width: 320px) {
+    .popup__input-container {
+        padding: 75px 0 0;
+    }
+}

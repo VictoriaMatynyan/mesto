@@ -4,6 +4,9 @@
     font-weight: 500;
     margin: 0;
     z-index: 150;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 364px) {
