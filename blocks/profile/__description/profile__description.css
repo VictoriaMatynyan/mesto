@@ -9,17 +9,15 @@
     z-index: 150;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
     .profile__description {
         text-align: center;
     }
 }
 
-@media screen and (max-width: 365px) {
+@media screen and (max-width: 504px) {
     .profile__description {
         font-size: 14px;
         line-height: 16.94px;
-        display: grid;
-        grid-column-end: span 2;
     }
 }
