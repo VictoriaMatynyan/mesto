@@ -37,11 +37,6 @@ popupCloseSignArr.forEach (function (item) {
     })
 })
 
-// popup.addEventListener('click', (evt) => {
-//     if (evt.target === evt.currentTarget) {
-//         togglePopupStatus(popup)}
-// }) функция закрытия окна popup при нажатии на область вне окна
-
 const elements = [
     {
         name: 'Канада',
@@ -52,12 +47,12 @@ const elements = [
         link: 'https://images.unsplash.com/photo-1527995145077-f35025789549?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
     },
     {
-        name: 'Швейцария',
-        link: 'https://images.unsplash.com/photo-1508166093217-f35d00c95fca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
-    },
-    {
         name: 'Исландия',
         link: 'https://images.unsplash.com/photo-1504829857797-ddff29c27927?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
+    },
+    {
+        name: 'Швейцария',
+        link: 'https://images.unsplash.com/photo-1508166093217-f35d00c95fca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
     },
     {
         name: 'Фарерские острова',
@@ -82,7 +77,7 @@ const renderItem = (places) => {
     const likeButton = cardElement.querySelector('.element__like-button').addEventListener('click', (evt) =>
         evt.target.classList.toggle('element__like-button_active'));
     
-    elementCards.append(cardElement);
+    elementCards.prepend(cardElement);
 }
 
 elements.forEach((el) => {
@@ -100,13 +95,27 @@ function handleFormProfileSubmit (evt) {
 
 formProfileElement.addEventListener('submit', handleFormProfileSubmit);
 
-// function handleFormAddSubmit (evt) {
-//     evt.preventDefault();
-//     const nameInput = popupInputName.value;
-//     const descriptionInput = popupInputDescription.value;
-//     profileName.textContent = popupInputName.value;
-//     profileDescription.textContent = popupInputDescription.value;
-//     togglePopupStatus(popup);
-// }
+function createCard () {
+    const placeItem = popupInputPlace.value;
+    const placeLink = popupInputLink.value;
+    const newPlaceItem = {
+        name: placeItem,
+        link: placeLink
+    }
+    const newCardElement = renderItem(newPlaceItem);
+    return newCardElement;
+}
 
-// formAddlement.addEventListener('submit', handleFormAddSubmit);
+function handleFormAddSubmit (evt) {
+    evt.preventDefault();
+    createCard ();
+    popupAdd.classList.remove('popup_opened');
+}
+
+formAddElement.addEventListener('submit', handleFormAddSubmit);
+
+
+// popup.addEventListener('click', (evt) => {
+//     if (evt.target === evt.currentTarget) {
+//         togglePopupStatus(popup)}
+// }) функция закрытия окна popup при нажатии на область вне окна
