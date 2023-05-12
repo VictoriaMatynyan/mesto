@@ -17,24 +17,22 @@ const popupImage = document.querySelector('.popup-image');
 const popupPicture = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 
+const addPopupStatus = (popupToBeAdded) => popupToBeAdded.classList.add('popup_opened');
 const togglePopupStatus = (popupIntoToggle) => popupIntoToggle.classList.toggle('popup_opened');
 const removePopupStatus = (popupToBeRemoved) => popupToBeRemoved.classList.remove('popup_opened');
 
 const popupEditOpener = document.querySelector('.profile__popup-open_type_edit').addEventListener('click', () => {
-    togglePopupStatus(popupEdit);
+    addPopupStatus(popupEdit);
     popupInputName.value = profileName.textContent;
     popupInputDescription.value = profileDescription.textContent;
 })
 
-const popupAddOpener = document.querySelector('.profile__popup-open_type_add').addEventListener('click', () => togglePopupStatus(popupAdd));
-
-
+const popupAddOpener = document.querySelector('.profile__popup-open_type_add').addEventListener('click', () => addPopupStatus(popupAdd));
 
 popupCloseSignArr.forEach (function (item) {
     item.addEventListener('click', () => {
         if (popupEdit) {
             removePopupStatus(popupEdit);
-            // popupEdit.classList.remove('popup_opened');
             popupInputName.value = '';
             popupInputDescription.value = '';
         }
@@ -78,7 +76,6 @@ const deleteButton = (evt) => {
     const delItem = evt.target.closest('.element');
     delItem.remove();
 }
-
 
 const renderItem = (places) => {
     const cardElement = elementTemplate.cloneNode(true);
@@ -130,7 +127,6 @@ function handleFormAddSubmit (evt) {
 }
 
 formAddElement.addEventListener('submit', handleFormAddSubmit);
-
 
 // popup.addEventListener('click', (evt) => {
 //     if (evt.target === evt.currentTarget) {
