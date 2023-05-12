@@ -5,18 +5,18 @@ const popupCloseSigns = document.querySelectorAll('.popup__close-button');
 const popupCloseSignArr = Array.from(popupCloseSigns);
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
-const formElement = document.querySelector('.popup__input-container');
-const popupInputName = formElement.querySelector('.popup__input_type_name');
-const popupInputDescription = formElement.querySelector('.popup__input_type_description');
-const popupInputPlace = formElement.querySelector('.popup__input_type_place');
-const popupInputLink = formElement.querySelector('.popup__input_type_link');
+const formProfileElement = document.querySelector('.popup__input-container_type_edit');
+const popupInputName = formProfileElement.querySelector('.popup__input_type_name');
+const popupInputDescription = formProfileElement.querySelector('.popup__input_type_description');
+const formAddElement = document.querySelector('.popup__input-container_type_add');
+const popupInputPlace = formAddElement.querySelector('.popup__input_type_place');
+const popupInputLink = formAddElement.querySelector('.popup__input_type_link');
 const elementCards = document.querySelector('.elements');
 const elementTemplate = document.querySelector('.element-template').content;
 
 // const BUTTON_ADD_TITLE = 'Создать' 
 
 const togglePopupStatus = (popupIntoToggle) => popupIntoToggle.classList.toggle('popup_opened');
-
 
 const popupEditOpener = document.querySelector('.profile__popup-open_type_edit').addEventListener('click', () => {
     togglePopupStatus(popupEdit);
@@ -41,17 +41,6 @@ popupCloseSignArr.forEach (function (item) {
 //     if (evt.target === evt.currentTarget) {
 //         togglePopupStatus(popup)}
 // }) функция закрытия окна popup при нажатии на область вне окна
-
-function handleFormSubmit (evt) {
-    evt.preventDefault();
-    const nameInput = popupInputName.value;
-    const descriptionInput = popupInputDescription.value;
-    profileName.textContent = popupInputName.value;
-    profileDescription.textContent = popupInputDescription.value;
-    togglePopupStatus(popup);
-}
-
-formElement.addEventListener('submit', handleFormSubmit);
 
 const elements = [
     {
@@ -80,13 +69,44 @@ const elements = [
     },
 ]
 
-elements.forEach((el) => {
+const deleteButton = (evt) => {
+    const delItem = evt.target.closest('.element');
+    delItem.remove();
+}
+
+const renderItem = (places) => {
     const cardElement = elementTemplate.cloneNode(true);
-    
-    cardElement.querySelector('.element__image').src = el.link;
-    cardElement.querySelector('.element__caption').textContent = el.name;
+    cardElement.querySelector('.element__image').src = places.link;
+    cardElement.querySelector('.element__caption').textContent = places.name;
+    cardElement.querySelector('.element__delete-button').addEventListener('click', deleteButton);
     const likeButton = cardElement.querySelector('.element__like-button').addEventListener('click', (evt) =>
         evt.target.classList.toggle('element__like-button_active'));
     
     elementCards.append(cardElement);
+}
+
+elements.forEach((el) => {
+    renderItem(el);
 })
+
+function handleFormProfileSubmit (evt) {
+    evt.preventDefault();
+    const nameInput = popupInputName.value;
+    const descriptionInput = popupInputDescription.value;
+    profileName.textContent = nameInput;
+    profileDescription.textContent = descriptionInput;
+    togglePopupStatus(popup);
+}
+
+formProfileElement.addEventListener('submit', handleFormProfileSubmit);
+
+// function handleFormAddSubmit (evt) {
+//     evt.preventDefault();
+//     const nameInput = popupInputName.value;
+//     const descriptionInput = popupInputDescription.value;
+//     profileName.textContent = popupInputName.value;
+//     profileDescription.textContent = popupInputDescription.value;
+//     togglePopupStatus(popup);
+// }
+
+// formAddlement.addEventListener('submit', handleFormAddSubmit);
