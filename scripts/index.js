@@ -86,7 +86,6 @@ const renderItem = (places) => {
         popupPicture.src = cardImage;
         popupCaption.textContent = places.name;
     });
-    console.log(popupImageOpener);
     cardElement.querySelector('.element__delete-button').addEventListener('click', deleteButton);
     const likeButton = cardElement.querySelector('.element__like-button').addEventListener('click', (evt) =>
         evt.target.classList.toggle('element__like-button_active'));
