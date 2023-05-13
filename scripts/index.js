@@ -21,13 +21,13 @@ const addPopupStatus = (popupToBeAdded) => popupToBeAdded.classList.add('popup_o
 const togglePopupStatus = (popupIntoToggle) => popupIntoToggle.classList.toggle('popup_opened');
 const removePopupStatus = (popupToBeRemoved) => popupToBeRemoved.classList.remove('popup_opened');
 
-const popupEditOpener = document.querySelector('.profile__popup-open_type_edit').addEventListener('click', () => {
+const popupEditOpener = document.querySelector('.profile__popup-edit').addEventListener('click', () => {
     addPopupStatus(popupEdit);
     popupInputName.value = profileName.textContent;
     popupInputDescription.value = profileDescription.textContent;
 })
 
-const popupAddOpener = document.querySelector('.profile__popup-open_type_add').addEventListener('click', () => addPopupStatus(popupAdd));
+const popupAddOpener = document.querySelector('.profile__popup-add').addEventListener('click', () => addPopupStatus(popupAdd));
 
 popupCloseSignArr.forEach (function (item) {
     item.addEventListener('click', () => {
