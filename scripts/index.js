@@ -1,8 +1,6 @@
-const popup = document.querySelector('.popup');
 const popupEdit = document.querySelector('.popup-edit');
 const popupAdd = document.querySelector('.popup-add');
 const popupCloseSigns = document.querySelectorAll('.popup__close-button');
-const popupCloseSignArr = Array.from(popupCloseSigns);
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const formProfileElement = document.querySelector('.popup__input-container_edit');
@@ -18,7 +16,6 @@ const popupPicture = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 
 const addPopupStatus = (popupToBeAdded) => popupToBeAdded.classList.add('popup_opened');
-const togglePopupStatus = (popupIntoToggle) => popupIntoToggle.classList.toggle('popup_opened');
 const removePopupStatus = (popupToBeRemoved) => popupToBeRemoved.classList.remove('popup_opened');
 
 const popupEditOpener = document.querySelector('.profile__popup-edit').addEventListener('click', () => {
@@ -29,20 +26,9 @@ const popupEditOpener = document.querySelector('.profile__popup-edit').addEventL
 
 const popupAddOpener = document.querySelector('.profile__popup-add').addEventListener('click', () => addPopupStatus(popupAdd));
 
-popupCloseSignArr.forEach (function (item) {
-    item.addEventListener('click', () => {
-        if (popupEdit) {
-            removePopupStatus(popupEdit);
-            popupInputName.value = '';
-            popupInputDescription.value = '';
-        }
-        if (popupAdd) {
-            removePopupStatus(popupAdd);
-        } 
-        if (popupImage) {
-            removePopupStatus(popupImage);
-        }
-    })
+popupCloseSigns.forEach((sign) => {
+    const popup = sign.closest('.popup');
+    sign.addEventListener('click', () => removePopupStatus(popup));
 })
 
 const elements = [
@@ -77,24 +63,39 @@ const deleteButton = (evt) => {
     delItem.remove();
 }
 
-const renderItem = (places) => {
+const createCard = (place) => {
     const cardElement = elementTemplate.cloneNode(true);
-    const cardImage = cardElement.querySelector('.element__image').src = places.link;
-    cardElement.querySelector('.element__caption').textContent = places.name;
+    const cardImage = cardElement.querySelector('.element__image');
+    cardImage.src = place.link;
+    cardElement.alt = 'Цветные фотографии гор, природы, озёр, морей и океанов из разных стран.';
+    cardElement.querySelector('.element__caption').textContent = place.name;
     const popupImageOpener = cardElement.querySelector('.element__popup-open').addEventListener('click', () => {
-        togglePopupStatus(popupImage);
-        popupPicture.src = cardImage;
-        popupCaption.textContent = places.name;
+        addPopupStatus(popupImage);
+        popupPicture.src = cardImage.src;
+        popupPicture.alt = cardImage.alt;
+        popupCaption.textContent = place.name;
     });
     cardElement.querySelector('.element__delete-button').addEventListener('click', deleteButton);
     const likeButton = cardElement.querySelector('.element__like-button').addEventListener('click', (evt) =>
         evt.target.classList.toggle('element__like-button_active'));
     
-    elementCards.prepend(cardElement);
+    return cardElement;
+}
+
+function renderItem() {
+    const placeItem = popupInputPlace.value;
+    const placeLink = popupInputLink.value;
+    const newPlaceItem = {
+        name: placeItem,
+        link: placeLink
+    }
+    const newCardElement = createCard(newPlaceItem);
+    elementCards.prepend(newCardElement);
 }
 
 elements.forEach((el) => {
-    renderItem(el);
+    const newCardItem = createCard(el);
+    elementCards.prepend(newCardItem);
 })
 
 function handleFormProfileSubmit (evt) {
@@ -103,26 +104,16 @@ function handleFormProfileSubmit (evt) {
     const descriptionInput = popupInputDescription.value;
     profileName.textContent = nameInput;
     profileDescription.textContent = descriptionInput;
-    togglePopupStatus(popup);
+    removePopupStatus(popupEdit);
 }
 
 formProfileElement.addEventListener('submit', handleFormProfileSubmit);
 
-function createCard () {
-    const placeItem = popupInputPlace.value;
-    const placeLink = popupInputLink.value;
-    const newPlaceItem = {
-        name: placeItem,
-        link: placeLink
-    }
-    const newCardElement = renderItem(newPlaceItem);
-    return newCardElement;
-}
-
 function handleFormAddSubmit (evt) {
     evt.preventDefault();
-    createCard ();
-    togglePopupStatus(popupAdd);
+    renderItem();
+    removePopupStatus(popupAdd);
+    evt.target.reset();
 }
 
 formAddElement.addEventListener('submit', handleFormAddSubmit);
