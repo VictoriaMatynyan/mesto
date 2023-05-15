@@ -1,6 +1,6 @@
+const popups = document.querySelectorAll('.popup');
 const popupEdit = document.querySelector('.popup-edit');
 const popupAdd = document.querySelector('.popup-add');
-const popupCloseSigns = document.querySelectorAll('.popup__close-button');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const formProfileElement = document.querySelector('.popup__input-container_edit');
@@ -26,26 +26,32 @@ const popupEditOpener = document.querySelector('.profile__popup-edit').addEventL
 
 const popupAddOpener = document.querySelector('.profile__popup-add').addEventListener('click', () => addPopupStatus(popupAdd));
 
-popupCloseSigns.forEach((sign) => {
-    const popup = sign.closest('.popup');
-    sign.addEventListener('click', () => removePopupStatus(popup));
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            removePopupStatus(popup)
+        }
+        if (evt.target.classList.contains('popup__close-button')) {
+            removePopupStatus(popup)
+        }
+    })
 })
 
 const elements = [
     {
-        name: 'Канада',
+        name: 'Озеро Морейн, Канада',
         link: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
     },
     {
-        name: 'Ирландия',
+        name: 'Утёсы Мохер, Ирландия',
         link: 'https://images.unsplash.com/photo-1527995145077-f35025789549?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
     },
     {
-        name: 'Исландия',
+        name: 'Вик, Исландия',
         link: 'https://images.unsplash.com/photo-1504829857797-ddff29c27927?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
     },
     {
-        name: 'Швейцария',
+        name: 'Лаутербруннен, Швейцария',
         link: 'https://images.unsplash.com/photo-1508166093217-f35d00c95fca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
     },
     {
@@ -53,7 +59,7 @@ const elements = [
         link: 'https://images.unsplash.com/photo-1610962427218-1d6878a96662?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
     },
     {
-        name: 'США',
+        name: 'Гранд-Каньон, США',
         link: 'https://images.unsplash.com/photo-1456425712190-0dd8c2b00156?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
     },
 ]
@@ -67,7 +73,7 @@ const createCard = (place) => {
     const cardElement = elementTemplate.cloneNode(true);
     const cardImage = cardElement.querySelector('.element__image');
     cardImage.src = place.link;
-    cardElement.alt = 'Цветные фотографии гор, природы, озёр, морей и океанов из разных стран.';
+    cardElement.alt = place.name;
     cardElement.querySelector('.element__caption').textContent = place.name;
     const popupImageOpener = cardElement.querySelector('.element__popup-open').addEventListener('click', () => {
         addPopupStatus(popupImage);
@@ -122,3 +128,8 @@ formAddElement.addEventListener('submit', handleFormAddSubmit);
 //     if (evt.target === evt.currentTarget) {
 //         togglePopupStatus(popup)}
 // }) функция закрытия окна popup при нажатии на область вне окна
+
+// popupCloseSigns.forEach((sign) => {
+//     const popup = sign.closest('.popup');
+//     sign.addEventListener('click', () => removePopupStatus(popup));
+// }) альтернативный обработчик для крестиков
