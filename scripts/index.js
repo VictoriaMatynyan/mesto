@@ -28,7 +28,7 @@ const popupAddOpener = document.querySelector('.profile__popup-add').addEventLis
 
 popups.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup_opened')) {
+        if (evt.target.classList.contains('popup_opened') || evt.target === evt.currentTarget) {
             removePopupStatus(popup)
         }
         if (evt.target.classList.contains('popup__close-button')) {
@@ -123,11 +123,6 @@ function handleFormAddSubmit (evt) {
 }
 
 formAddElement.addEventListener('submit', handleFormAddSubmit);
-
-// popup.addEventListener('click', (evt) => {
-//     if (evt.target === evt.currentTarget) {
-//         togglePopupStatus(popup)}
-// }) функция закрытия окна popup при нажатии на область вне окна
 
 // popupCloseSigns.forEach((sign) => {
 //     const popup = sign.closest('.popup');
