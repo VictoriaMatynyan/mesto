@@ -1,6 +1,5 @@
 /*sprint 6*/
 
-const formElement = document.querySelector('.popup__input-container');
 // const formInput = formElement.querySelector('.popup__input');
 
 const formSubmitButtonState = (form) => {
@@ -16,52 +15,51 @@ const formSubmitButtonState = (form) => {
 
 const getErrorElement = (input) => {
     return document.querySelector(`.${input.id}-error`);
-}
+};
 
 const showInputError = (input) => {
     const errorElement = getErrorElement(input);
     errorElement.textContent = input.validationMessage;
-    // inputElement.classList.add('popup__input-error');
-    // formError.textContent = errorMessage;
-    // errorElement.classList.add('name-input-error_active');
+    input.classList.add('popup__input_invalid');
 };
 
 const hideInputError = (input) => {
     const errorElement = getErrorElement(input);
     errorElement.textContent = '';
-    // const errorElement = formElement.querySelector(`.${formInput.id}-error`);
-    // inputElement.classList.remove('popup__input-error');
-    // errorElement.classList.remove('name-input-error_active');
-    // errorElement.textContent = '';
+    input.classList.remove('popup__input_invalid');
 };
 
 const validateInput = (input) => {
     if (!input.validity.valid) {
-        showInputError(input)
+        showInputError(input);
     } else {
-        hideInputError(input)
+        hideInputError(input);
     }
 };
 
+const sendForm = (evt) => {
+    evt.preventDefault();
+    const form = evt.target;
+    if (!form.checkValidity()) {
+        console.log('no good');
+    } else {
+        console.log('all good');
+    }
+};
 
-// const sendForm = (evt) => {
-//     evt.preventDefault();
-//     const form = evt.target;
-//     if (!form.checkValidity()) {
-//         console.log('no good');
-//     } else {
-//         console.log('all good');
-//     }
-// };
+document.querySelectorAll('.popup__input-container').forEach((formElement) => {
+    formElement.addEventListener('input', (evt) => {
+        const input = evt.target;
+        const form = evt.currentTarget;
+        validateInput(input);
+        formSubmitButtonState(form);
+    }, true);
 
-formElement.addEventListener('input', (evt) => {
-    const input = evt.target;
-    const form = evt.currentTarget;
-    validateInput(input);
-    formSubmitButtonState(form);
-}, true);
+    formElement.addEventListener('submit', sendForm);
+    formSubmitButtonState(formElement)
+});
 
-// formElement.addEventListener('submit', sendForm);
+
 
 // const setEventListeners = (formElement) => {
 //     const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
@@ -76,3 +74,4 @@ formElement.addEventListener('input', (evt) => {
 
 
 /*sprint 6*/
+ 

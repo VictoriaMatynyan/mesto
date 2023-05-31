@@ -53,9 +53,11 @@
         <div class="popup__container">
             <button class="popup__close-button" type="button"></button>
             <h3 class="popup__header">Новое место</h3>
-            <form class="popup__input-container popup__input-container_add" name="profileInfoForm">
-                <input type="text" placeholder="Название" class="popup__input popup__input_type_place" name="nameInput" autocomplete="off">
-                <input type="url" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link" name="nameDescription" autocomplete="off">
+            <form class="popup__input-container popup__input-container_add" name="placeAddForm" novalidate>
+                <input type="text" id="placeName-input" placeholder="Название" class="popup__input popup__input_type_place" name="placeInputName" required minlength="2" maxlength="30" autocomplete="off">
+                <span class="placeName-input-error popup__input-error"></span>
+                <input type="url" id="placeDescription-input" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link" name="placeInputDescription" required autocomplete="off">
+                <span class="placeDescription-input-error popup__input-error"></span>
                 <button type="submit" class="popup__submit-button">Создать</button>
             </form>
         </div>
