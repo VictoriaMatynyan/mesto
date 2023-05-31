@@ -36,9 +36,15 @@
         <div class="popup__container">
             <button class="popup__close-button" type="button"></button>
             <h3 class="popup__header">Редактировать&nbsp;профиль</h3>
-            <form class="popup__input-container popup__input-container_edit" name="profileInfoForm">
-                <input type="text" placeholder="Ваше имя" class="popup__input popup__input_type_name" name="nameInput" required minlength="2" maxlength="40" autocomplete="off">
-                <input type="text" placeholder="О себе" class="popup__input popup__input_type_description" name="nameDescription" required minlength="2" maxlength="200" autocomplete="off">
+            <form class="popup__input-container popup__input-container_edit" name="profileInfoForm" novalidate>
+                <label class="popup__field">
+                    <input type="text" id="name-input" placeholder="Ваше имя" class="popup__input popup__input_type_name" name="nameInput" required minlength="2" maxlength="40" autocomplete="off">
+                    <span class="name-input-error popup__input-error"></span>
+                </label>
+                <label class="popup__field">
+                    <input type="text" id="description-input" placeholder="О себе" class="popup__input popup__input_type_description" name="nameDescription" required minlength="2" maxlength="200" autocomplete="off">
+                    <span class="description-input-error popup__input-error"></span>
+                </label>
                 <button type="submit" class="popup__submit-button">Сохранить</button>
             </form>
         </div>

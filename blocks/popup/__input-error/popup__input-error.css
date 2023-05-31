@@ -1,0 +1,12 @@
+.popup__input-error {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14.52px;
+    color: #FF0000;
+    margin: 0;
+    /* position: absolute; */ /*убрано, чтобы попап мог расширяться */
+    padding-top: 5px;
+    /* top: 28px; */
+    min-height: calc((12px*2) + 5px);
+}
