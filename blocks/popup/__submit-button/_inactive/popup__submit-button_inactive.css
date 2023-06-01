@@ -1,4 +1,4 @@
-.popup__submit-button_invalid {
+.popup__submit-button_inactive {
     border: 1px solid rgba(0, 0, 0, 0.2);
     background-color: #fff;
     color: rgba(0, 0, 0, 0.2);

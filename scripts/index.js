@@ -3,10 +3,10 @@ const popupEdit = document.querySelector('.popup-edit');
 const popupAdd = document.querySelector('.popup-add');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
-const formProfileElement = document.querySelector('.popup__input-container_edit');
+const formProfileElement = document.querySelector('.popup__input-form_type_edit');
 const popupInputName = formProfileElement.querySelector('.popup__input_type_name');
 const popupInputDescription = formProfileElement.querySelector('.popup__input_type_description');
-const formAddElement = document.querySelector('.popup__input-container_add');
+const formAddElement = document.querySelector('.popup__input-form_type_add');
 const popupInputPlace = formAddElement.querySelector('.popup__input_type_place');
 const popupInputLink = formAddElement.querySelector('.popup__input_type_link');
 const elementCards = document.querySelector('.elements');
@@ -28,7 +28,6 @@ const popupEditOpener = document.querySelector('.profile__popup-edit').addEventL
     addPopupStatus(popupEdit);
     popupInputName.value = profileName.textContent;
     popupInputDescription.value = profileDescription.textContent;
-    formSubmitButtonState(formProfileElement)
 });
 
 const popupAddOpener = document.querySelector('.profile__popup-add').addEventListener('click', () => addPopupStatus(popupAdd));
@@ -48,20 +47,19 @@ popups.forEach((popup) => {
         }
     })
 });
-
 //для себя: keydown должен добавляться к документу, а не к каждому модальному окну, поэтому нельзя повесить
 // addEventListener на popup внутри popups.forEach
 
-// popups.forEach((popup) => {
-//     popup.addEventListener('mousedown', (evt) => {
-//         if (evt.target.classList.contains('popup_opened') || evt.target === evt.currentTarget) {
-//             removePopupStatus(popup)
-//         }
-//         if (evt.target.classList.contains('popup__close-button')) {
-//             removePopupStatus(popup)
-//         };
-//     });
-// });
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened') || evt.target === evt.currentTarget) {
+            removePopupStatus(popup)
+        }
+        if (evt.target.classList.contains('popup__close-button')) {
+            removePopupStatus(popup)
+        };
+    });
+});
 
 const elements = [
     {
