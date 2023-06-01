@@ -18,11 +18,10 @@ const popupCaption = document.querySelector('.popup__caption');
 const addPopupStatus = (popupToBeAdded) => popupToBeAdded.classList.add('popup_opened');
 const removePopupStatus = (popupToBeRemoved) => popupToBeRemoved.classList.remove('popup_opened');
 
-// document.addEventListener('keydown', (evt) => {
-//     const popup = document.querySelector('.popup_opened')
-//         if (evt.key === 'Escape' || evt.target.classList.contains('popup_opened')) {
-//             removePopupStatus(evt)
-//         }
+// const closePopupByEsc = document.addEventListener('keydown', (evt) => {
+//     if (evt.key === 'Escape') {
+//         removePopupStatus(popup)
+//     }
 // });
 
 const popupEditOpener = document.querySelector('.profile__popup-edit').addEventListener('click', () => {
@@ -43,7 +42,26 @@ popups.forEach((popup) => {
             removePopupStatus(popup)
         };
     });
+    document.addEventListener('keydown', (evt) => {
+        if (evt.key === 'Escape') {
+            removePopupStatus(popup)
+        }
+    })
 });
+
+//для себя: keydown должен добавляться к документу, а не к каждому модальному окну, поэтому нельзя повесить
+// addEventListener на popup внутри popups.forEach
+
+// popups.forEach((popup) => {
+//     popup.addEventListener('mousedown', (evt) => {
+//         if (evt.target.classList.contains('popup_opened') || evt.target === evt.currentTarget) {
+//             removePopupStatus(popup)
+//         }
+//         if (evt.target.classList.contains('popup__close-button')) {
+//             removePopupStatus(popup)
+//         };
+//     });
+// });
 
 const elements = [
     {

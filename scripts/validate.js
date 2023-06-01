@@ -41,9 +41,9 @@ const sendForm = (evt) => {
     evt.preventDefault();
     const form = evt.target;
     if (!form.checkValidity()) {
-        console.log('no good');
+        console.log('doesnt work');
     } else {
-        console.log('all good');
+        console.log('it works!');
     }
 };
 
