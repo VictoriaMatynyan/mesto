@@ -24,7 +24,6 @@ const popupEditOpener = document.querySelector('.profile__popup-edit').addEventL
     addPopupStatus(popupEdit);
     popupInputName.value = profileName.textContent;
     popupInputDescription.value = profileDescription.textContent;
-    // enableValidation(formProfileElement);
     // setFormSubmitButtonState(formProfileElement.querySelectorAll('.popup__input'), formProfileElement.querySelector('.popup__submit-button'));
 });
 

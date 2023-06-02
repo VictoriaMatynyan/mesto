@@ -1,85 +1,58 @@
-/*sprint 6*/
+// const getErrorElement = (validationConfig) => {
+//     return document.querySelector(`.${validationConfig.inputElement.id}-error`);
+// }; функция уже не нужна, т.к. её функционал в функциях showInputError и hideInputError
 
-// const formInput = formElement.querySelector('.popup__input');
-
-// const setFormSubmitButtonState = (form) => {
-//     const submitButton = form.querySelector('.popup__submit-button');
-//     if (!form.checkValidity()) {
-//         submitButton.setAttribute('disabled', true);
-//         submitButton.classList.add('popup__submit-button_inactive');
-//     } else {
-//         submitButton.removeAttribute('disabled');
-//         submitButton.classList.remove('popup__submit-button_inactive');
-//     }
-// };
-
-
-
-const getErrorElement = (inputElement) => {
-    return document.querySelector(`.${inputElement.id}-error`);
-};
-
-const showInputError = (inputElement, errorElement) => {
+const showInputError = (validationConfig, inputElement) => {
+    const errorElement = document.querySelector(`.${inputElement.id}-error`);
     errorElement.textContent = inputElement.validationMessage;
-    inputElement.classList.add('popup__input_invalid');
+    inputElement.classList.add(validationConfig.inputError);
 };
 
-const hideInputError = (inputElement, errorElement) => {
+const hideInputError = (validationConfig, inputElement) => {
+    const errorElement = document.querySelector(`.${inputElement.id}-error`);
     errorElement.textContent = '';
-    inputElement.classList.remove('popup__input_invalid');
+    inputElement.classList.remove(validationConfig.inputError);
 };
 
-const validateInput = (formElement, inputElement) => {
+const validateInput = (validationConfig, inputElement) => {
     if (!inputElement.validity.valid) {
-        showInputError(inputElement, errorElement);
+        showInputError(validationConfig, inputElement);
     } else {
-        hideInputError(inputElement, errorElement);
+        hideInputError(validationConfig, inputElement);
     }
 };
 
 const hasInvalidInput = (inputList) => {
-    return Array.from(inputList).some((inputElement) => { //создала настоящий массив, иначе функция получает псевдомассив NodeList
+    return inputList.some((inputElement) => {
         return !inputElement.validity.valid; 
     });
 };
-// в этой функции использую именно inputElement, а не свойство validationConfig, потому что
-// validationConfig.inputElement относится к объекту настроек, а не к массиву inputList
 
-
-const setFormSubmitButtonState = (inputList, submitButton, inactiveSubmitButton) => {
+const setFormSubmitButtonState = (inputList, validationConfig) => {
+    const submitButton = document.querySelector(validationConfig.submitButton);
     if (hasInvalidInput(inputList)) {
       submitButton.setAttribute('disabled', true);
-      submitButton.classList.add(inactiveSubmitButton);
+      submitButton.classList.add(validationConfig.inactiveSubmitButton);
     } else {
       submitButton.removeAttribute('disabled');
-      submitButton.classList.remove(inactiveSubmitButton);
+      submitButton.classList.remove(validationConfig.inactiveSubmitButton);
     }
-  };
+};
 
-// const sendForm = (evt) => {
-//     evt.preventDefault();
-//     const form = evt.target;
-//     if (!form.checkValidity()) {
-//         console.log('doesnt work');
-//     } else {
-//         console.log('it works!');
-//     }
-// };
 
-const setFormState = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-    const submitButton = formElement.querySelector('.popup__submit-button');
-    validateInput(inputList);
-    setFormSubmitButtonState(inputList, submitButton);
-}
+// const setFormState = (validationConfig, inputElement) => {
+//     const inputList = Array.from(document.querySelectorAll(validationConfig.inputElement));
+//     validateInput(validationConfig, inputElement);
+//     setFormSubmitButtonState(inputList, validationConfig);
+// } функция для открытий попапов, не работает пока
 
 const setEventListeners = (formElement, validationConfig) => {
     const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputElement));
-    const submitButton = formElement.querySelector(validationConfig.submitButton);
+    // const submitButton = formElement.querySelector(validationConfig.submitButton);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
-            validateInput(formElement, inputElement);
-            setFormSubmitButtonState(inputList, submitButton);
+            validateInput(validationConfig, inputElement);
+            setFormSubmitButtonState(inputList, validationConfig); //submitButton в агрументах здесь не нужен
         });
     });
 };
@@ -90,7 +63,6 @@ const enableValidation = (validationConfig) => {
         formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
             setEventListeners(formElement, validationConfig);
-            // setFormState(formElement);
          });
     });
 };
@@ -102,8 +74,10 @@ enableValidation({
     inactiveSubmitButton: 'popup__submit-button_inactive',
     inputError: 'popup__input_invalid',
     errorElement: 'popup__input-error'
-  });
+});
 
+
+// старый код, удалю, когда всё будет работать
 
 //   const enableValidation = (validationConfig) => {
 //     const formList = Array.from(document.querySelectorAll(validationConfig.formElement));
