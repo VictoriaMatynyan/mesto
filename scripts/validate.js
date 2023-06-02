@@ -28,8 +28,8 @@ const hasInvalidInput = (inputList) => {
     });
 };
 
-const setFormSubmitButtonState = (inputList, validationConfig) => {
-    const submitButton = document.querySelector(validationConfig.submitButton);
+const setFormSubmitButtonState = (formElement, inputList, validationConfig) => {
+    const submitButton = formElement.querySelector(validationConfig.submitButton);
     if (hasInvalidInput(inputList)) {
       submitButton.setAttribute('disabled', true);
       submitButton.classList.add(validationConfig.inactiveSubmitButton);
@@ -39,12 +39,14 @@ const setFormSubmitButtonState = (inputList, validationConfig) => {
     }
 };
 
-
-// const setFormState = (validationConfig, inputElement) => {
-//     const inputList = Array.from(document.querySelectorAll(validationConfig.inputElement));
-//     validateInput(validationConfig, inputElement);
-//     setFormSubmitButtonState(inputList, validationConfig);
-// } функция для открытий попапов, не работает пока
+const setFormState = (formElement, validationConfig) => {
+    const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputElement));
+    inputList.forEach((inputElement) => {
+        validateInput(validationConfig, inputElement);
+        hideInputError(validationConfig, inputElement);
+    });
+    setFormSubmitButtonState(formElement, inputList, validationConfig);
+} 
 
 const setEventListeners = (formElement, validationConfig) => {
     const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputElement));
@@ -52,7 +54,7 @@ const setEventListeners = (formElement, validationConfig) => {
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
             validateInput(validationConfig, inputElement);
-            setFormSubmitButtonState(inputList, validationConfig); //submitButton в агрументах здесь не нужен
+            setFormSubmitButtonState(formElement, inputList, validationConfig); //submitButton в агрументах здесь не нужен
         });
     });
 };
@@ -61,9 +63,9 @@ const enableValidation = (validationConfig) => {
     const formList = Array.from(document.querySelectorAll(validationConfig.formElement));
     formList.forEach((formElement) => {
         formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-            setEventListeners(formElement, validationConfig);
-         });
+            evt.preventDefault();   
+        });
+        setEventListeners(formElement, validationConfig);
     });
 };
 

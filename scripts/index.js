@@ -18,16 +18,26 @@ const popupCaption = document.querySelector('.popup__caption');
 const addPopupStatus = (popupToBeAdded) => popupToBeAdded.classList.add('popup_opened');
 const removePopupStatus = (popupToBeRemoved) => popupToBeRemoved.classList.remove('popup_opened');
 
-
+const formStateObj = {
+    formElement: '.popup__input-form',
+    inputElement: '.popup__input',
+    submitButton: '.popup__submit-button',
+    inactiveSubmitButton: 'popup__submit-button_inactive',
+    inputError: 'popup__input_invalid',
+    errorElement: 'popup__input-error'
+}
 
 const popupEditOpener = document.querySelector('.profile__popup-edit').addEventListener('click', () => {
     addPopupStatus(popupEdit);
     popupInputName.value = profileName.textContent;
     popupInputDescription.value = profileDescription.textContent;
-    // setFormSubmitButtonState(formProfileElement.querySelectorAll('.popup__input'), formProfileElement.querySelector('.popup__submit-button'));
+    setFormState(formProfileElement, formStateObj);
 });
 
-const popupAddOpener = document.querySelector('.profile__popup-add').addEventListener('click', () => addPopupStatus(popupAdd));
+const popupAddOpener = document.querySelector('.profile__popup-add').addEventListener('click', () => {
+    addPopupStatus(popupAdd);
+    setFormState(formAddElement, formStateObj);
+});
 
 popups.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
