@@ -25,7 +25,7 @@ const formStateObj = {
     inactiveSubmitButton: 'popup__submit-button_inactive',
     inputError: 'popup__input_invalid',
     errorElement: 'popup__input-error'
-}
+} //объявляю объект из validate.js для удобства передачи аргументов в функцию setFormState
 
 const popupEditOpener = document.querySelector('.profile__popup-edit').addEventListener('click', () => {
     addPopupStatus(popupEdit);

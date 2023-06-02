@@ -1,7 +1,3 @@
-// const getErrorElement = (validationConfig) => {
-//     return document.querySelector(`.${validationConfig.inputElement.id}-error`);
-// }; функция уже не нужна, т.к. её функционал в функциях showInputError и hideInputError
-
 const showInputError = (validationConfig, inputElement) => {
     const errorElement = document.querySelector(`.${inputElement.id}-error`);
     errorElement.textContent = inputElement.validationMessage;
@@ -50,11 +46,10 @@ const setFormState = (formElement, validationConfig) => {
 
 const setEventListeners = (formElement, validationConfig) => {
     const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputElement));
-    // const submitButton = formElement.querySelector(validationConfig.submitButton);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
             validateInput(validationConfig, inputElement);
-            setFormSubmitButtonState(formElement, inputList, validationConfig); //submitButton в агрументах здесь не нужен
+            setFormSubmitButtonState(formElement, inputList, validationConfig);
         });
     });
 };
@@ -79,7 +74,7 @@ enableValidation({
 });
 
 
-// старый код, удалю, когда всё будет работать
+// старый код, удалю, когда новый будет проверен и одобрен
 
 //   const enableValidation = (validationConfig) => {
 //     const formList = Array.from(document.querySelectorAll(validationConfig.formElement));
@@ -98,8 +93,6 @@ enableValidation({
     //     });        
     // });
     // });
-
-
 // const setFormSubmitButtonState = (form) => {
 //     const submitButton = form.querySelector('.popup__submit-button');
 //     if (!form.checkValidity()) {
@@ -156,12 +149,4 @@ enableValidation({
 //     formElement.addEventListener('submit', sendForm);
 //     setFormSubmitButtonState(formElement)
 // });
-
-
-
-
-
-
-
-/*sprint 6*/
  
