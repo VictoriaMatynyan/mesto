@@ -30,7 +30,6 @@ const hideInputError = (inputElement, errorElement) => {
 };
 
 const validateInput = (formElement, inputElement) => {
-    const errorElement = getErrorElement(inputElement);
     if (!inputElement.validity.valid) {
         showInputError(inputElement, errorElement);
     } else {
@@ -39,35 +38,44 @@ const validateInput = (formElement, inputElement) => {
 };
 
 const hasInvalidInput = (inputList) => {
-    return inputList.some((inputElement) => {
-        return !inputElement.validity.valid;
+    return Array.from(inputList).some((inputElement) => { //создала настоящий массив, иначе функция получает псевдомассив NodeList
+        return !inputElement.validity.valid; 
     });
 };
+// в этой функции использую именно inputElement, а не свойство validationConfig, потому что
+// validationConfig.inputElement относится к объекту настроек, а не к массиву inputList
 
-const setFormSubmitButtonState = (inputList, submitButton) => {
+
+const setFormSubmitButtonState = (inputList, submitButton, inactiveSubmitButton) => {
     if (hasInvalidInput(inputList)) {
       submitButton.setAttribute('disabled', true);
-      submitButton.classList.add('popup__submit-button_inactive');
+      submitButton.classList.add(inactiveSubmitButton);
     } else {
       submitButton.removeAttribute('disabled');
-      submitButton.classList.remove('popup__submit-button_inactive');
+      submitButton.classList.remove(inactiveSubmitButton);
     }
   };
 
-const sendForm = (evt) => {
-    evt.preventDefault();
-    const form = evt.target;
-    if (!form.checkValidity()) {
-        console.log('doesnt work');
-    } else {
-        console.log('it works!');
-    }
-};
+// const sendForm = (evt) => {
+//     evt.preventDefault();
+//     const form = evt.target;
+//     if (!form.checkValidity()) {
+//         console.log('doesnt work');
+//     } else {
+//         console.log('it works!');
+//     }
+// };
 
-const setEventListeners = (formElement) => {
-    const inputList = Array.from(document.querySelectorAll('.popup__input'));
+const setFormState = (formElement) => {
+    const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
     const submitButton = formElement.querySelector('.popup__submit-button');
+    validateInput(inputList);
     setFormSubmitButtonState(inputList, submitButton);
+}
+
+const setEventListeners = (formElement, validationConfig) => {
+    const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputElement));
+    const submitButton = formElement.querySelector(validationConfig.submitButton);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
             validateInput(formElement, inputElement);
@@ -76,22 +84,14 @@ const setEventListeners = (formElement) => {
     });
 };
 
-const enableValidation = (enableConfig) => {
-    const formList = Array.from(document.querySelectorAll(enableConfig.formElement));
+const enableValidation = (validationConfig) => {
+    const formList = Array.from(document.querySelectorAll(validationConfig.formElement));
     formList.forEach((formElement) => {
         formElement.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            setEventListeners(formElement);
-            })
-    const inputList = Array.from(formElement.querySelectorAll(enableConfig.inputElement));
-    const submitButton = formElement.querySelector(enableConfig.submitButton);
-    inputList.forEach((inputElement) => {
-        inputElement.addEventListener('input', (evt) => {
-            evt.preventDefault();
-            validateInput(formElement, inputElement);
-            setFormSubmitButtonState(inputList, submitButton);
-        });        
-    });
+            setEventListeners(formElement, validationConfig);
+            // setFormState(formElement);
+         });
     });
 };
 
@@ -103,6 +103,25 @@ enableValidation({
     inputError: 'popup__input_invalid',
     errorElement: 'popup__input-error'
   });
+
+
+//   const enableValidation = (validationConfig) => {
+//     const formList = Array.from(document.querySelectorAll(validationConfig.formElement));
+//     formList.forEach((formElement) => {
+//         formElement.addEventListener('submit', (evt) => {
+//             evt.preventDefault();
+//             setEventListeners(validationConfig.formElement);
+//             })
+    // const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputElement));
+    // const submitButton = formElement.querySelector(validationConfig.submitButton);
+    // inputList.forEach((inputElement) => {
+    //     inputElement.addEventListener('input', (evt) => {
+    //         evt.preventDefault();
+    //         validateInput(formElement, inputElement);
+    //         setFormSubmitButtonState(inputList, submitButton);
+    //     });        
+    // });
+    // });
 
 
 // const setFormSubmitButtonState = (form) => {

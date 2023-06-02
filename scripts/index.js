@@ -18,16 +18,14 @@ const popupCaption = document.querySelector('.popup__caption');
 const addPopupStatus = (popupToBeAdded) => popupToBeAdded.classList.add('popup_opened');
 const removePopupStatus = (popupToBeRemoved) => popupToBeRemoved.classList.remove('popup_opened');
 
-// const closePopupByEsc = document.addEventListener('keydown', (evt) => {
-//     if (evt.key === 'Escape') {
-//         removePopupStatus(popup)
-//     }
-// });
+
 
 const popupEditOpener = document.querySelector('.profile__popup-edit').addEventListener('click', () => {
     addPopupStatus(popupEdit);
     popupInputName.value = profileName.textContent;
     popupInputDescription.value = profileDescription.textContent;
+    // enableValidation(formProfileElement);
+    // setFormSubmitButtonState(formProfileElement.querySelectorAll('.popup__input'), formProfileElement.querySelector('.popup__submit-button'));
 });
 
 const popupAddOpener = document.querySelector('.profile__popup-add').addEventListener('click', () => addPopupStatus(popupAdd));

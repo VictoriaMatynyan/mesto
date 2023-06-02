@@ -1,3 +1,3 @@
-.popup__input_type_name::placeholder, ._type_description::placeholder {
+.popup__input_type_name::placeholder, .popup__input_type_description::placeholder {
     color: #000;
 }
