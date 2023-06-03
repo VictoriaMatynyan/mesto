@@ -1,20 +1,20 @@
-const showInputError = (validationConfig, inputElement) => {
-    const errorElement = document.querySelector(`.${inputElement.id}-error`);
+const showInputError = (formElement, validationConfig, inputElement) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     errorElement.textContent = inputElement.validationMessage;
     inputElement.classList.add(validationConfig.inputError);
 };
 
-const hideInputError = (validationConfig, inputElement) => {
-    const errorElement = document.querySelector(`.${inputElement.id}-error`);
+const hideInputError = (formElement, validationConfig, inputElement) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     errorElement.textContent = '';
     inputElement.classList.remove(validationConfig.inputError);
 };
 
-const validateInput = (validationConfig, inputElement) => {
+const validateInput = (formElement, validationConfig, inputElement) => {
     if (!inputElement.validity.valid) {
-        showInputError(validationConfig, inputElement);
+        showInputError(formElement, validationConfig, inputElement);
     } else {
-        hideInputError(validationConfig, inputElement);
+        hideInputError(formElement, validationConfig, inputElement);
     }
 };
 
@@ -24,8 +24,7 @@ const hasInvalidInput = (inputList) => {
     });
 };
 
-const setFormSubmitButtonState = (formElement, inputList, validationConfig) => {
-    const submitButton = formElement.querySelector(validationConfig.submitButton);
+const setFormSubmitButtonState = (submitButton, inputList, validationConfig) => {
     if (hasInvalidInput(inputList)) {
       submitButton.setAttribute('disabled', true);
       submitButton.classList.add(validationConfig.inactiveSubmitButton);
@@ -37,19 +36,20 @@ const setFormSubmitButtonState = (formElement, inputList, validationConfig) => {
 
 const setFormState = (formElement, validationConfig) => {
     const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputElement));
+    const submitButton = formElement.querySelector(validationConfig.submitButton);
     inputList.forEach((inputElement) => {
-        validateInput(validationConfig, inputElement);
-        hideInputError(validationConfig, inputElement);
+        hideInputError(formElement,validationConfig, inputElement);
     });
-    setFormSubmitButtonState(formElement, inputList, validationConfig);
+    setFormSubmitButtonState(submitButton, inputList, validationConfig);
 } 
 
 const setEventListeners = (formElement, validationConfig) => {
     const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputElement));
+    const submitButton = formElement.querySelector(validationConfig.submitButton);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', () => {
-            validateInput(validationConfig, inputElement);
-            setFormSubmitButtonState(formElement, inputList, validationConfig);
+            validateInput(formElement, validationConfig, inputElement);
+            setFormSubmitButtonState(submitButton, inputList, validationConfig);
         });
     });
 };
@@ -57,21 +57,29 @@ const setEventListeners = (formElement, validationConfig) => {
 const enableValidation = (validationConfig) => {
     const formList = Array.from(document.querySelectorAll(validationConfig.formElement));
     formList.forEach((formElement) => {
-        formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();   
-        });
         setEventListeners(formElement, validationConfig);
     });
 };
 
-enableValidation({
+//объявляю объект для удобства передачи аргументов в функцию setFormState
+// p.s. объект был изначально в функции enableValidation как аргумент, сейчас заменён на formStateObj, чтобы не дублироваться
+const formStateObj = {
     formElement: '.popup__input-form',
     inputElement: '.popup__input',
     submitButton: '.popup__submit-button',
     inactiveSubmitButton: 'popup__submit-button_inactive',
     inputError: 'popup__input_invalid',
     errorElement: 'popup__input-error'
-});
+} 
+
+// вызываю функцию, кот. запускает валидацию форм и передаю объект настроек как аргумент
+// p.s. раньше здесь было содержимое formStateObj из index.js.
+enableValidation(formStateObj);
+
+
+
+
+
 
 
 // старый код, удалю, когда новый будет проверен и одобрен

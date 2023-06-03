@@ -15,17 +15,27 @@ const popupImage = document.querySelector('.popup-image');
 const popupPicture = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 
-const addPopupStatus = (popupToBeAdded) => popupToBeAdded.classList.add('popup_opened');
-const removePopupStatus = (popupToBeRemoved) => popupToBeRemoved.classList.remove('popup_opened');
+// 1) установка и удаление слушателя keydown для closePopupByEsc должны осуществляться при открытии и закрытии попапа,
+// иначе, когда ни один попап не открыт, нажатие Esc будет лишний раз вызывать это событие.
+// 2) keydown должен добавляться к документу, а не к каждому модальному окну, поэтому нельзя повесить
+// addEventListener на popup внутри popups.forEach
+function closePopupByEsc(evt) {
+    if (evt.key === 'Escape') {
+      const openedPopup = document.querySelector('.popup_opened');
+      removePopupStatus(openedPopup); 
+    };
+};
 
-const formStateObj = {
-    formElement: '.popup__input-form',
-    inputElement: '.popup__input',
-    submitButton: '.popup__submit-button',
-    inactiveSubmitButton: 'popup__submit-button_inactive',
-    inputError: 'popup__input_invalid',
-    errorElement: 'popup__input-error'
-} //объявляю объект из validate.js для удобства передачи аргументов в функцию setFormState
+// передаю функцию для закрытия popups по Esc через слушатель keydown в функции открытия и закрытия popups
+const addPopupStatus = (popupToBeAdded) => {
+    popupToBeAdded.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupByEsc);
+}
+
+const removePopupStatus = (popupToBeRemoved) => {
+    popupToBeRemoved.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupByEsc);
+}
 
 const popupEditOpener = document.querySelector('.profile__popup-edit').addEventListener('click', () => {
     addPopupStatus(popupEdit);
@@ -41,28 +51,13 @@ const popupAddOpener = document.querySelector('.profile__popup-add').addEventLis
 
 popups.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup_opened') || evt.target === evt.currentTarget) {
+        if (evt.target.classList.contains('popup_opened')) {
             removePopupStatus(popup)
         }
         if (evt.target.classList.contains('popup__close-button')) {
             removePopupStatus(popup)
-        };
-    });
-    document.addEventListener('keydown', (evt) => {
-        if (evt.key === 'Escape') {
-            removePopupStatus(popup)
         }
-    })
-});
-//для себя: keydown должен добавляться к документу, а не к каждому модальному окну, поэтому нельзя повесить
-// addEventListener на popup внутри popups.forEach
-
-popups.forEach((popup) => {
-    popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup_opened') || evt.target === evt.currentTarget) {
-            removePopupStatus(popup)
-        }
-        if (evt.target.classList.contains('popup__close-button')) {
+        if (evt.target === evt.currentTarget) {
             removePopupStatus(popup)
         };
     });
