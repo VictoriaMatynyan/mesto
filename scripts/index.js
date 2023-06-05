@@ -14,7 +14,7 @@ const elementTemplate = document.querySelector('.element-template').content;
 const popupImage = document.querySelector('.popup-image');
 const popupPicture = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
-
+ 
 // 1) установка и удаление слушателя keydown для closePopupByEsc должны осуществляться при открытии и закрытии попапа,
 // иначе, когда ни один попап не открыт, нажатие Esc будет лишний раз вызывать это событие.
 // 2) keydown должен добавляться к документу, а не к каждому модальному окну, поэтому нельзя повесить
@@ -57,9 +57,6 @@ popups.forEach((popup) => {
         if (evt.target.classList.contains('popup__close-button')) {
             removePopupStatus(popup)
         }
-        if (evt.target === evt.currentTarget) {
-            removePopupStatus(popup)
-        };
     });
 });
 
@@ -154,3 +151,7 @@ formAddElement.addEventListener('submit', handleFormAddSubmit);
 //     const popup = sign.closest('.popup');
 //     sign.addEventListener('click', () => removePopupStatus(popup));
 // }) альтернативный обработчик для крестиков
+
+// if (evt.target === evt.currentTarget) {
+//     removePopupStatus(popup)
+// }; альтернативный способ закрытия попапов при клике на overlay
