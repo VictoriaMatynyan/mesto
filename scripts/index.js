@@ -1,3 +1,5 @@
+import Card from './Card.js';
+
 const popups = document.querySelectorAll('.popup');
 const popupEdit = document.querySelector('.popup-edit');
 const popupAdd = document.querySelector('.popup-add');
@@ -10,15 +12,11 @@ const formAddElement = document.querySelector('.popup__input-form_type_add');
 const popupInputPlace = formAddElement.querySelector('.popup__input_type_place');
 const popupInputLink = formAddElement.querySelector('.popup__input_type_link');
 const elementCards = document.querySelector('.elements');
-const elementTemplate = document.querySelector('.element-template').content;
+// const elementTemplate = document.querySelector('.element-template').content;
 const popupImage = document.querySelector('.popup-image');
 const popupPicture = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
  
-// 1) установка и удаление слушателя keydown для closePopupByEsc должны осуществляться при открытии и закрытии попапа,
-// иначе, когда ни один попап не открыт, нажатие Esc будет лишний раз вызывать это событие.
-// 2) keydown должен добавляться к документу, а не к каждому модальному окну, поэтому нельзя повесить
-// addEventListener на popup внутри popups.forEach
 function closePopupByEsc(evt) {
     if (evt.key === 'Escape') {
       const openedPopup = document.querySelector('.popup_opened');
@@ -26,7 +24,6 @@ function closePopupByEsc(evt) {
     };
 };
 
-// передаю функцию для закрытия popups по Esc через слушатель keydown в функции открытия и закрытия popups
 const addPopupStatus = (popupToBeAdded) => {
     popupToBeAdded.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupByEsc);
@@ -87,30 +84,6 @@ const elements = [
     },
 ]
 
-const deleteButton = (evt) => {
-    const delItem = evt.target.closest('.element');
-    delItem.remove();
-}
-
-const createCard = (place) => {
-    const cardElement = elementTemplate.cloneNode(true);
-    const cardImage = cardElement.querySelector('.element__image');
-    cardImage.src = place.link;
-    cardElement.alt = place.name;
-    cardElement.querySelector('.element__caption').textContent = place.name;
-    const popupImageOpener = cardElement.querySelector('.element__popup-open').addEventListener('click', () => {
-        addPopupStatus(popupImage);
-        popupPicture.src = cardImage.src;
-        popupPicture.alt = cardImage.alt;
-        popupCaption.textContent = place.name;
-    });
-    cardElement.querySelector('.element__delete-button').addEventListener('click', deleteButton);
-    const likeButton = cardElement.querySelector('.element__like-button').addEventListener('click', (evt) =>
-        evt.target.classList.toggle('element__like-button_active'));
-    
-    return cardElement;
-}
-
 function renderItem() {
     const placeItem = popupInputPlace.value;
     const placeLink = popupInputLink.value;
@@ -122,10 +95,18 @@ function renderItem() {
     elementCards.prepend(newCardElement);
 }
 
+const openPopupImg = (link, name) => {
+    addPopupStatus(popupImage);
+    popupPicture.src = `${link}`;
+    popupPicture.alt = name;
+    popupCaption.textContent = name;
+};
+
 elements.forEach((el) => {
-    const newCardItem = createCard(el);
-    elementCards.prepend(newCardItem);
-})
+    const card = new Card(el, '.element-template', openPopupImg);
+    const newCardElement = card.generateCard();
+    elementCards.prepend(newCardElement);
+});
 
 function handleFormProfileSubmit (evt) {
     evt.preventDefault();
@@ -147,6 +128,37 @@ function handleFormAddSubmit (evt) {
 
 formAddElement.addEventListener('submit', handleFormAddSubmit);
 
+// старый код just in case (of emergency)
+
+// const deleteButton = (evt) => {
+//     const delItem = evt.target.closest('.element');
+//     delItem.remove();
+// } функция кнопки удаления
+
+// const createCard = (place) => {
+//     const cardElement = elementTemplate.cloneNode(true);
+//     const cardImage = cardElement.querySelector('.element__image');
+//     cardImage.src = place.link;
+//     cardElement.alt = place.name;
+//     cardElement.querySelector('.element__caption').textContent = place.name;
+//     const popupImageOpener = cardElement.querySelector('.element__popup-open').addEventListener('click', () => {
+//         addPopupStatus(popupImage);
+//         popupPicture.src = cardImage.src;
+//         popupPicture.alt = cardImage.alt;
+//         popupCaption.textContent = place.name;
+//     });
+//     cardElement.querySelector('.element__delete-button').addEventListener('click', deleteButton);
+//     const likeButton = cardElement.querySelector('.element__like-button').addEventListener('click', (evt) =>
+//         evt.target.classList.toggle('element__like-button_active'));
+    
+//     return cardElement;
+// } создание карточек + слушатели кнопки лайка, удаления, открытия попапа
+
+// elements.forEach((el) => {
+//     const newCardItem = createCard(el);
+//     elementCards.prepend(newCardItem);
+// })
+
 // popupCloseSigns.forEach((sign) => {
 //     const popup = sign.closest('.popup');
 //     sign.addEventListener('click', () => removePopupStatus(popup));
@@ -154,4 +166,6 @@ formAddElement.addEventListener('submit', handleFormAddSubmit);
 
 // if (evt.target === evt.currentTarget) {
 //     removePopupStatus(popup)
-// }; альтернативный способ закрытия попапов при клике на overlay
+// }; альтернативный способ закрытия попапов при клике на overlay. 
+// В условной конструкции popup.forEach это лишнее условие, которое заставляет каждый попап при
+// клике на оверлей закрываться дважды. Первый раз в 55 строке и второй раз в этом условии
