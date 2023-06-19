@@ -48,10 +48,7 @@ const popupAddOpener = document.querySelector('.profile__popup-add').addEventLis
 
 popups.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup_opened')) {
-            removePopupStatus(popup)
-        }
-        if (evt.target.classList.contains('popup__close-button')) {
+        if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
             removePopupStatus(popup)
         }
     });
@@ -84,15 +81,20 @@ const elements = [
     },
 ];
 
+
+function createCardClassInstance(data, templateSelector, openPopupImg) {
+    const card = new Card(data, templateSelector, openPopupImg);
+    const newCardElement = card.generateCard();
+    elementCards.prepend(newCardElement);
+};
+
 // для себя: в этой функции названия свойств объекта - name и link - должны совпадать с названиями свойств в
 // конструкторе класса Card
 function renderItem() {
-    const card = new Card({
-        name: popupInputPlace.value,
-        link: popupInputLink.value
-    }, '.element-template', openPopupImg);
-    const newCardItem = card.generateCard();
-    elementCards.prepend(newCardItem);
+    createCardClassInstance({
+            name: popupInputPlace.value,
+            link: popupInputLink.value
+        }, '.element-template', openPopupImg);
 };
 
 const openPopupImg = (link, name) => {
@@ -105,11 +107,7 @@ const openPopupImg = (link, name) => {
 // для себя: здесь в 1м аргументе создания экз-ра Card мы передаём el, потому что это позволяет нам использовать текущий
 // элемент массива elements. Внутри колбэк-функции мы будем обращаться к свойствам объекта (= текущего элемента
 // массива, используя его имя, => el.name, el.link
-elements.forEach((el) => {
-    const card = new Card(el, '.element-template', openPopupImg);
-    const newCardElement = card.generateCard();
-    elementCards.prepend(newCardElement);
-});
+elements.forEach((el) => createCardClassInstance(el, '.element-template', openPopupImg));
 
 function handleFormProfileSubmit (evt) {
     evt.preventDefault();
@@ -134,6 +132,18 @@ formAddElement.addEventListener('submit', handleFormAddSubmit);
 
 
 // старый код just in case (of emergency)
+
+// popups.forEach((popup) => {
+//     popup.addEventListener('mousedown', (evt) => {
+//         if (evt.target.classList.contains('popup_opened')) {
+//             removePopupStatus(popup)
+//         }
+//         if (evt.target.classList.contains('popup__close-button')) {
+//             removePopupStatus(popup)
+//         }
+//     });
+// }); альтернативный способ закрытия попапов, разделённый на 2 if, которые я объединила в 1 строчку оператором ||
+
 
 // const deleteButton = (evt) => {
 //     const delItem = evt.target.closest('.element');
