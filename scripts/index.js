@@ -1,22 +1,22 @@
 import Card from './Card.js';
+import {popups, popupEdit, popupAdd, profileName, profileDescription, formProfileElement, popupInputName, popupInputDescription, formAddElement, popupInputPlace,
+    popupInputLink, elementCards, popupImage, popupPicture, popupCaption} from './constants.js';
+import FormValidator from './FormValidator.js';
 
-const popups = document.querySelectorAll('.popup');
-const popupEdit = document.querySelector('.popup-edit');
-const popupAdd = document.querySelector('.popup-add');
-const profileName = document.querySelector('.profile__name');
-const profileDescription = document.querySelector('.profile__description');
-const formProfileElement = document.querySelector('.popup__input-form_type_edit');
-const popupInputName = formProfileElement.querySelector('.popup__input_type_name');
-const popupInputDescription = formProfileElement.querySelector('.popup__input_type_description');
-const formAddElement = document.querySelector('.popup__input-form_type_add');
-const popupInputPlace = formAddElement.querySelector('.popup__input_type_place');
-const popupInputLink = formAddElement.querySelector('.popup__input_type_link');
-const elementCards = document.querySelector('.elements');
-// const elementTemplate = document.querySelector('.element-template').content;
-const popupImage = document.querySelector('.popup-image');
-const popupPicture = document.querySelector('.popup__image');
-const popupCaption = document.querySelector('.popup__caption');
+const formStateObj = {
+    formElement: '.popup__input-form',
+    inputElement: '.popup__input',
+    submitButton: '.popup__submit-button',
+    inactiveSubmitButton: 'popup__submit-button_inactive',
+    inputError: 'popup__input_invalid',
+    errorElement: 'popup__input-error'
+};
  
+const formEditValidator = new FormValidator(formStateObj, formProfileElement);
+formEditValidator.enableValidation();
+const formAddValidator = new FormValidator(formStateObj, formAddElement);
+formAddValidator.enableValidation();
+
 function closePopupByEsc(evt) {
     if (evt.key === 'Escape') {
       const openedPopup = document.querySelector('.popup_opened');
@@ -27,23 +27,23 @@ function closePopupByEsc(evt) {
 const addPopupStatus = (popupToBeAdded) => {
     popupToBeAdded.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupByEsc);
-}
+};
 
 const removePopupStatus = (popupToBeRemoved) => {
     popupToBeRemoved.classList.remove('popup_opened');
     document.removeEventListener('keydown', closePopupByEsc);
-}
+};
 
 const popupEditOpener = document.querySelector('.profile__popup-edit').addEventListener('click', () => {
     addPopupStatus(popupEdit);
     popupInputName.value = profileName.textContent;
     popupInputDescription.value = profileDescription.textContent;
-    setFormState(formProfileElement, formStateObj);
+    formEditValidator.setFormState();
 });
 
 const popupAddOpener = document.querySelector('.profile__popup-add').addEventListener('click', () => {
     addPopupStatus(popupAdd);
-    setFormState(formAddElement, formStateObj);
+    formAddValidator.setFormState();
 });
 
 popups.forEach((popup) => {
@@ -82,18 +82,18 @@ const elements = [
         name: 'Гранд-Каньон, США',
         link: 'https://images.unsplash.com/photo-1456425712190-0dd8c2b00156?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
     },
-]
+];
 
+// для себя: в этой функции названия свойств объекта - name и link - должны совпадать с названиями свойств в
+// конструкторе класса Card
 function renderItem() {
-    const placeItem = popupInputPlace.value;
-    const placeLink = popupInputLink.value;
-    const newPlaceItem = {
-        name: placeItem,
-        link: placeLink
-    }
-    const newCardElement = createCard(newPlaceItem);
-    elementCards.prepend(newCardElement);
-}
+    const card = new Card({
+        name: popupInputPlace.value,
+        link: popupInputLink.value
+    }, '.element-template', openPopupImg);
+    const newCardItem = card.generateCard();
+    elementCards.prepend(newCardItem);
+};
 
 const openPopupImg = (link, name) => {
     addPopupStatus(popupImage);
@@ -102,6 +102,9 @@ const openPopupImg = (link, name) => {
     popupCaption.textContent = name;
 };
 
+// для себя: здесь в 1м аргументе создания экз-ра Card мы передаём el, потому что это позволяет нам использовать текущий
+// элемент массива elements. Внутри колбэк-функции мы будем обращаться к свойствам объекта (= текущего элемента
+// массива, используя его имя, => el.name, el.link
 elements.forEach((el) => {
     const card = new Card(el, '.element-template', openPopupImg);
     const newCardElement = card.generateCard();
@@ -115,18 +118,20 @@ function handleFormProfileSubmit (evt) {
     profileName.textContent = nameInput;
     profileDescription.textContent = descriptionInput;
     removePopupStatus(popupEdit);
-}
+};
 
 formProfileElement.addEventListener('submit', handleFormProfileSubmit);
+
 
 function handleFormAddSubmit (evt) {
     evt.preventDefault();
     renderItem();
     removePopupStatus(popupAdd);
     evt.target.reset();
-}
+};
 
 formAddElement.addEventListener('submit', handleFormAddSubmit);
+
 
 // старый код just in case (of emergency)
 
@@ -157,7 +162,7 @@ formAddElement.addEventListener('submit', handleFormAddSubmit);
 // elements.forEach((el) => {
 //     const newCardItem = createCard(el);
 //     elementCards.prepend(newCardItem);
-// })
+// }) отражение карточек на странице
 
 // popupCloseSigns.forEach((sign) => {
 //     const popup = sign.closest('.popup');

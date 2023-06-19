@@ -18,7 +18,6 @@ class Card {
 
     generateCard() {
         this._element = this._getTemplate();
-                
         this._element.querySelector('.element__image').src = this._link;
         this._element.querySelector('.element__image').alt = this._name;
         this._element.querySelector('.element__caption').textContent = this._name;
@@ -55,7 +54,6 @@ class Card {
     _handleLikeCard() {
         this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
     }
-
 }
 
 export default Card
