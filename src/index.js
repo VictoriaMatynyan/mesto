@@ -1,7 +1,11 @@
-import Card from './Card.js';
+// import '../pages/index.css';
+import Card from '../scripts/Card.js';
 import {popups, popupEdit, popupAdd, profileName, profileDescription, formProfileElement, popupInputName, popupInputDescription, formAddElement, popupInputPlace,
-    popupInputLink, elementCards, popupImage, popupPicture, popupCaption} from './constants.js';
-import FormValidator from './FormValidator.js';
+    popupInputLink, elementCards, popupImage, popupPicture, popupCaption} from '../scripts/constants.js';
+import FormValidator from '../scripts/FormValidator.js';
+import Section from '../scripts/Section.js';
+import Popup from '../scripts/Popup.js';
+import PopupWithImage from '../scripts/PopupWithImage.js';
 
 const formStateObj = {
     formElement: '.popup__input-form',
@@ -55,7 +59,7 @@ popups.forEach((popup) => {
 });
 
 const imageCanada = new URL('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', import.meta.url);
-const imageIreland = new URL('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', import.meta.url);
+const imageIreland = new URL('https://images.unsplash.com/photo-1527995145077-f35025789549?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', import.meta.url);
 const imageIceland = new URL('https://images.unsplash.com/photo-1504829857797-ddff29c27927?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', import.meta.url);
 const imageSwitzerland = new URL('https://images.unsplash.com/photo-1508166093217-f35d00c95fca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80', import.meta.url);
 const imageFaroeIslands = new URL('https://images.unsplash.com/photo-1610962427218-1d6878a96662?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', import.meta.url);
@@ -121,8 +125,6 @@ function createCardClassInstance(data, templateSelector, openPopupImg) {
     elementCards.prepend(newCardElement);
 };
 
-// для себя: в этой функции названия свойств объекта - name и link - должны совпадать с названиями свойств в
-// конструкторе класса Card
 function renderItem() {
     createCardClassInstance({
             name: popupInputPlace.value,
@@ -137,9 +139,6 @@ const openPopupImg = (link, name) => {
     popupCaption.textContent = name;
 };
 
-// для себя: здесь в 1м аргументе создания экз-ра Card мы передаём el, потому что это позволяет нам использовать текущий
-// элемент массива elements. Внутри колбэк-функции мы будем обращаться к свойствам объекта (= текущего элемента
-// массива, используя его имя, => el.name, el.link
 elements.forEach((el) => createCardClassInstance(el, '.element-template', openPopupImg));
 
 function handleFormProfileSubmit (evt) {
