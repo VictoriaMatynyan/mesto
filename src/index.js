@@ -91,33 +91,6 @@ const elements = [
         link: imageUsa
     },
 ];
-// const elements = [
-//     {
-//         name: 'Озеро Морейн, Канада',
-//         link: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
-//     },
-//     {
-//         name: 'Утёсы Мохер, Ирландия',
-//         link: 'https://images.unsplash.com/photo-1527995145077-f35025789549?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
-//     },
-//     {
-//         name: 'Вик, Исландия',
-//         link: 'https://images.unsplash.com/photo-1504829857797-ddff29c27927?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
-//     },
-//     {
-//         name: 'Лаутербруннен, Швейцария',
-//         link: 'https://images.unsplash.com/photo-1508166093217-f35d00c95fca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
-//     },
-//     {
-//         name: 'Фарерские острова',
-//         link: 'https://images.unsplash.com/photo-1610962427218-1d6878a96662?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
-//     },
-//     {
-//         name: 'Гранд-Каньон, США',
-//         link: 'https://images.unsplash.com/photo-1456425712190-0dd8c2b00156?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
-//     },
-// ];
-
 
 function createCardClassInstance(data, templateSelector, openPopupImg) {
     const card = new Card(data, templateSelector, openPopupImg);
@@ -164,6 +137,33 @@ formAddElement.addEventListener('submit', handleFormAddSubmit);
 
 
 // старый код just in case (of emergency)
+
+// const elements = [
+//     {
+//         name: 'Озеро Морейн, Канада',
+//         link: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
+//     },
+//     {
+//         name: 'Утёсы Мохер, Ирландия',
+//         link: 'https://images.unsplash.com/photo-1527995145077-f35025789549?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
+//     },
+//     {
+//         name: 'Вик, Исландия',
+//         link: 'https://images.unsplash.com/photo-1504829857797-ddff29c27927?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
+//     },
+//     {
+//         name: 'Лаутербруннен, Швейцария',
+//         link: 'https://images.unsplash.com/photo-1508166093217-f35d00c95fca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80'
+//     },
+//     {
+//         name: 'Фарерские острова',
+//         link: 'https://images.unsplash.com/photo-1610962427218-1d6878a96662?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
+//     },
+//     {
+//         name: 'Гранд-Каньон, США',
+//         link: 'https://images.unsplash.com/photo-1456425712190-0dd8c2b00156?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'
+//     },
+// ]; массив карточек
 
 // popups.forEach((popup) => {
 //     popup.addEventListener('mousedown', (evt) => {
