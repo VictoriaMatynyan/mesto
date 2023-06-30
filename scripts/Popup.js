@@ -2,7 +2,8 @@ import {popupPicture, popupCaption, closeButton} from '../scripts/constants.js'
 
 export default class Popup {
     constructor(popup) {
-        this._popup = document.querySelector(popup)
+        this._popup = popup
+        // this._popup = document.querySelector(popup)
     }
 
     open() { 
