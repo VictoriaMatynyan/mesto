@@ -1,40 +1,36 @@
-import {popupPicture, popupCaption, closeButton} from '../scripts/constants.js'
-
 export default class Popup {
-    constructor(popup) {
-        this._popup = popup
+    constructor(popupSelector) {
+        this._popup = popupSelector;
     }
 
     open() { 
         this._popup.classList.add('popup_opened');
-        document.addEventListener('keydown', this._handleEscClose()); //по аналогии с функцией открытия попапа addPopupStatus()
+        document.addEventListener('keydown', this._handleEscClose); //по аналогии с функцией открытия попапа addPopupStatus()
     }
 
     close() {
         this._popup.classList.remove('popup_opened');
-        document.removeEventListener('keydown', this._handleEscClose()); //по аналогии с функцией закрытия попапа removePopupStatus()
-        // popupPicture.src = '';
-        // popupCaption.textContent = '';
+        document.removeEventListener('keydown', this._handleEscClose); //по аналогии с функцией закрытия попапа removePopupStatus()
     }
 
-    _handleEscClose() {
-        document.addEventListener('keydown', (evt) => {
-            if (evt.key === 'Escape') {
-                this.close(); 
-              };
-        });
-    }
+    _handleEscClose = (evt) => {
+        if (evt.key === "Escape") {
+            this.close(); 
+        };
+    };
 
     setEventListeners() {
-        closeButton.addEventListener('click', () => {
-            this.close();
-        });
-
         this._popup.addEventListener('mousedown', (evt) => {
-            if (evt.target === evt.currentTarget) {
+            if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
                 this.close();
-                this._handleEscClose();
             }
         });
     }
 }
+
+//  this._popup.addEventListener('mousedown', (evt) => {
+//     if (evt.target === evt.currentTarget) {
+//         this.close();
+//         this._handleEscClose();
+//     }
+// });

@@ -13,7 +13,7 @@ export default class UserInfo {
     }
 
     setUserInfo({nameInput, nameDescription}) {
-        this._userName.textContent = nameInput;
-        this._userData.textContent = nameDescription;
+        this._userName.textContent = nameInput; //здесь должно быть имя инпута (атрибут name)
+        this._userData.textContent = nameDescription; //здесь должно быть имя инпута (атрибут name)
     }
 }
