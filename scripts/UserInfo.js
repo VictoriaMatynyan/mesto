@@ -1,22 +1,19 @@
-import {profileName, profileDescription} from './constants.js'
-
 export default class UserInfo {
-    constructor({userName, userData}) {
-        this._userName = document.querySelector(userName);
-        this._userData = document.querySelector(userData);
+    constructor({userNameSelector, userDataSelector}) {
+        this._userName = document.querySelector(userNameSelector);
+        this._userData = document.querySelector(userDataSelector);
     }
 
     getUserInfo() {
         const userInfo = {
-            userName: this._userName.value,
-            userData: this._userData.value
+            name: this._userName.textContent,
+            data: this._userData.textContent
         }
         return userInfo;
     }
 
-    setUserInfo() {
-        const {userName, userData} =  this.getUserInfo();
-        profileName.textContent = userName;
-        profileDescription.textContent = userData;
+    setUserInfo({nameInput, nameDescription}) {
+        this._userName.textContent = nameInput;
+        this._userData.textContent = nameDescription;
     }
 }

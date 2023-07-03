@@ -1,6 +1,6 @@
 // import '../pages/index.css';
 import Card from '../scripts/Card.js';
-import {popups, popupEdit, popupAdd, profileName, profileDescription, formProfileElement, 
+import {popups, popupEdit, popupEditOpener, popupAdd, profileName, profileDescription, formProfileElement, 
     popupInputName, popupInputDescription, formAddElement, popupInputPlace,
     popupInputLink, elementCards, popupImage, popupPicture, popupCaption, formStateObj, 
     closeButton, elements} from '../scripts/constants.js';
@@ -13,51 +13,71 @@ import UserInfo from '../scripts/UserInfo.js';
 
 const formEditValidator = new FormValidator(formStateObj, formProfileElement);
 formEditValidator.enableValidation();
+
 const formAddValidator = new FormValidator(formStateObj, formAddElement);
 formAddValidator.enableValidation();
 
-function closePopupByEsc(evt) {
-    if (evt.key === 'Escape') {
-      const openedPopup = document.querySelector('.popup_opened');
-      removePopupStatus(openedPopup); 
-    };
-};
+const userInfo = new UserInfo({
+    userNameSelector: '.profile__name', 
+    userDataSelector: '.profile__description'
+})
 
-const addPopupStatus = (popupToBeAdded) => {
-    popupToBeAdded.classList.add('popup_opened');
-    document.addEventListener('keydown', closePopupByEsc);
-};
+// function closePopupByEsc(evt) {
+//     if (evt.key === 'Escape') {
+//       const openedPopup = document.querySelector('.popup_opened');
+//       removePopupStatus(openedPopup); 
+//     };
+// };
 
-const removePopupStatus = (popupToBeRemoved) => {
-    popupToBeRemoved.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closePopupByEsc);
-};
+// const addPopupStatus = (popupToBeAdded) => {
+//     popupToBeAdded.classList.add('popup_opened');
+//     document.addEventListener('keydown', closePopupByEsc);
+// };
 
-const popupEditOpener = document.querySelector('.profile__popup-edit').addEventListener('click', () => {
-    addPopupStatus(popupEdit);
+// const removePopupStatus = (popupToBeRemoved) => {
+//     popupToBeRemoved.classList.remove('popup_opened');
+//     document.removeEventListener('keydown', closePopupByEsc);
+// };
+
+
+// const popupAddOpener = document.querySelector('.profile__popup-add').addEventListener('click', () => {
+//     addPopupStatus(popupAdd);
+//     formAddValidator.setFormState();
+// });
+
+// popups.forEach((popup) => {
+//     popup.addEventListener('mousedown', (evt) => {
+//         if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
+//             removePopupStatus(popup)
+//         }
+//     });
+// });
+
+
+// function handleFormSubmit ()
+
+const profilePopup = new PopupWithForm(popupEdit, {
+    handleFormSubmit: (formValues) => {
+        userInfo.setUserInfo(formValues);
+        profilePopup.close();
+    }
+})
+profilePopup.setEventListeners();
+
+popupEditOpener.addEventListener('click', () => {
+    profilePopup.open();
     popupInputName.value = profileName.textContent;
     popupInputDescription.value = profileDescription.textContent;
     formEditValidator.setFormState();
 });
 
-const popupAddOpener = document.querySelector('.profile__popup-add').addEventListener('click', () => {
-    addPopupStatus(popupAdd);
-    formAddValidator.setFormState();
-});
 
-popups.forEach((popup) => {
-    popup.addEventListener('mousedown', (evt) => {
-        if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close-button')) {
-            removePopupStatus(popup)
-        }
-    });
-});
-
-
+// const popupEditOpener = document.querySelector('.profile__popup-edit');
+// popupEditOpener.addEventListener('click', profilePopup.open());
 
 // функция открытия попапа с картинкой (= handleCardClick в ТЗ)
 const openPopupImg = (link, name) => {
-    addPopupStatus(popupImage);
+    popupImage.classList.add('popup_opened');
     popupPicture.src = `${link}`;
     popupPicture.alt = name;
     popupCaption.textContent = name;
@@ -74,17 +94,6 @@ const elementList = new Section({
 }, elementCards);
 
 elementList.addItem();
-
-function handleFormProfileSubmit (evt) {
-    evt.preventDefault();
-    const nameInput = popupInputName.value;
-    const descriptionInput = popupInputDescription.value;
-    profileName.textContent = nameInput;
-    profileDescription.textContent = descriptionInput;
-    removePopupStatus(popupEdit);
-};
-
-formProfileElement.addEventListener('submit', handleFormProfileSubmit);
 
 
 function handleFormAddSubmit (evt) {
@@ -181,6 +190,17 @@ formAddElement.addEventListener('submit', handleFormAddSubmit);
 //     const newCardItem = createCard(el);
 //     elementCards.prepend(newCardItem);
 // }) отражение карточек на странице
+
+// function handleFormProfileSubmit (evt) {
+//     evt.preventDefault();
+//     const nameInput = popupInputName.value;
+//     const descriptionInput = popupInputDescription.value;
+//     profileName.textContent = nameInput;
+//     profileDescription.textContent = descriptionInput;
+//     removePopupStatus(popupEdit);
+// };
+// formProfileElement.addEventListener('submit', handleFormProfileSubmit); 
+//функция сабмита формы профиля
 
 // popupCloseSigns.forEach((sign) => {
 //     const popup = sign.closest('.popup');

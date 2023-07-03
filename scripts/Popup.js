@@ -3,17 +3,18 @@ import {popupPicture, popupCaption, closeButton} from '../scripts/constants.js'
 export default class Popup {
     constructor(popup) {
         this._popup = popup
-        // this._popup = document.querySelector(popup)
     }
 
     open() { 
         this._popup.classList.add('popup_opened');
+        document.addEventListener('keydown', this._handleEscClose()); //по аналогии с функцией открытия попапа addPopupStatus()
     }
 
     close() {
         this._popup.classList.remove('popup_opened');
-        popupPicture.src = '';
-        popupCaption.textContent = '';
+        document.removeEventListener('keydown', this._handleEscClose()); //по аналогии с функцией закрытия попапа removePopupStatus()
+        // popupPicture.src = '';
+        // popupCaption.textContent = '';
     }
 
     _handleEscClose() {
@@ -32,8 +33,8 @@ export default class Popup {
         this._popup.addEventListener('mousedown', (evt) => {
             if (evt.target === evt.currentTarget) {
                 this.close();
+                this._handleEscClose();
             }
         });
-        this._handleEscClose();
     }
 }
