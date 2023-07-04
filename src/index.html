@@ -7,18 +7,18 @@
     <meta name="description" content="Интерактивная страница для добавления фотографий, их удаления и лайков">
     <meta name="keyword" content="html, css, grid, grid-layout, javascript, adaptive web design, responsive web design">
     <meta name="author" content="Виктория Матынян">
-    <link rel="stylesheet" href="../pages/index.css">
-    <link rel="icon" href="data:;base64,=">
+    <link rel="stylesheet" href="../src/pages/index.css">
+    <link rel="icon" href="data:;base64,="> <!-- убираю ошибку "Cannot GET /favicon.ico"-->
     <title lang="en">Mesto Russia</title>
 </head>
 <body class="page">
     <header class="header">
-        <img src="../../../images/mesto_logo.svg" alt="Логотип Место России" class="header__logo">
+        <img src="../src/images/mesto_logo.svg" alt="Логотип Место России" class="header__logo">
     </header>
     <main class="content">
         <section class="profile">
             <div class="profile__data">
-                <img src="../../../images/avatar.jpg" alt="Аватар профиля" class="profile__avatar">
+                <img src="../src/images/avatar.jpg" alt="Аватар профиля" class="profile__avatar">
                 <div class="profile__info">
                     <h1 class="profile__name">Вика Матынян</h1>
                     <button class="profile__edit-button profile__popup-edit" type="button"></button>
@@ -82,14 +82,14 @@
             </figure>
         </div>
     </div>
-    <script type="module" src="../scripts/Section.js" ></script>
-    <script type="module" src="../scripts/Popup.js"></script>
-    <script type="module" src="../scripts/FormValidator.js"></script>
-    <script type="module" src="../scripts/Card.js"></script>
-    <script type="module" src="../scripts/PopupWithImage.js"></script>
-    <script type="module" src="../scripts/PopupWithForm.js"></script>
-    <script type="module" src="../scripts/UserInfo.js"></script>
-    <script type="module" src="../scripts/constants.js"></script>
-    <script type="module" src="../src/index.js"></script>
+    <!-- <script type="module" src="../src/components/Section.js" ></script>
+    <script type="module" src="../src/components/Popup.js"></script>
+    <script type="module" src="../src/components/FormValidator.js"></script>
+    <script type="module" src="../src/components/Card.js"></script>
+    <script type="module" src="../src/components/PopupWithImage.js"></script>
+    <script type="module" src="../src/components/PopupWithForm.js"></script>
+    <script type="module" src="../src/components/UserInfo.js"></script>
+    <script type="module" src="../src/components/constants.js"></script>
+    <script type="module" src="../src/index.js"></script> -->
 </body>
 </html>

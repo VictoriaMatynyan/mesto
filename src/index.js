@@ -1,14 +1,13 @@
-// import '../pages/index.css';
-import Card from '../scripts/Card.js';
-import {popups, popupEdit, popupEditOpener, popupAdd, profileName, profileDescription, formProfileElement, 
-    popupInputName, popupInputDescription, popupAddOpener, formAddElement, popupInputPlace,
-    popupInputLink, elementCards, popupImage, popupPicture, popupCaption, formStateObj, 
-    closeButton, elements} from '../scripts/constants.js';
-import FormValidator from '../scripts/FormValidator.js';
-import Section from '../scripts/Section.js';
-import PopupWithImage from '../scripts/PopupWithImage.js';
-import PopupWithForm from '../scripts/PopupWithForm.js';
-import UserInfo from '../scripts/UserInfo.js';
+import '../src/pages/index.css';
+import Card from '../src/components/Card.js';
+import {popupEdit, popupEditOpener, popupAdd, profileName, profileDescription, formProfileElement, 
+    popupInputName, popupInputDescription, popupAddOpener, formAddElement, elementCards, popupImage, 
+    formStateObj, elements} from '../src/components/constants.js';
+import FormValidator from '../src/components/FormValidator.js';
+import Section from '../src/components/Section.js';
+import PopupWithImage from '../src/components/PopupWithImage.js';
+import PopupWithForm from '../src/components/PopupWithForm.js';
+import UserInfo from '../src/components/UserInfo.js';
 
 const formEditValidator = new FormValidator(formStateObj, formProfileElement);
 formEditValidator.enableValidation();
@@ -44,11 +43,7 @@ const elementList = new Section({
     items: elements,
     renderer: (item) => {
         const card = new Card(item, '.element-template', {
-            handleCardClick: () => popupWithImage.open(item.name, item.link)
-                // popupPicture.src = link;
-                // popupPicture.alt = name;
-                // popupCaption.textContent = name;
-            
+            handleCardClick: () => popupWithImage.open(item.name, item.link)            
         });
         const newCardElement = card.generateCard();
         elementCards.prepend(newCardElement);
