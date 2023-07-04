@@ -46,7 +46,7 @@ export default class Card {
     }
 
     _handleOpenImagePopup() {
-        this._handleCardClick(this._link, this._name);
+        this._handleCardClick(this._name, this._link,);
     }
 
     _handleDeleteCard() {

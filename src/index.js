@@ -39,25 +39,16 @@ popupEditOpener.addEventListener('click', () => {
     formEditValidator.setFormState();
 });
 
-// функция открытия попапа с картинкой (= handleCardClick в ТЗ)
-// const handleCardClick = (link, name) => {
-//     popupImage.classList.add('popup_opened');
-//     popupPicture.src = `${link}`;
-//     popupPicture.alt = name;
-//     popupCaption.textContent = name;
-// };
-
 // отрисовываем карточки на странице
 const elementList = new Section({
     items: elements,
     renderer: (item) => {
         const card = new Card(item, '.element-template', {
-            handleCardClick: (link, name) => {
-                popupImage.classList.add('popup_opened');
-                popupPicture.src = link;
-                popupPicture.alt = name;
-                popupCaption.textContent = name;
-            }
+            handleCardClick: () => popupWithImage.open(item.name, item.link)
+                // popupPicture.src = link;
+                // popupPicture.alt = name;
+                // popupCaption.textContent = name;
+            
         });
         const newCardElement = card.generateCard();
         elementCards.prepend(newCardElement);
@@ -90,16 +81,7 @@ newCardPopup.setEventListeners();
 popupAddOpener.addEventListener('click', () => {
     newCardPopup.open();
     formAddValidator.setFormState();
-})
-
-// function handleFormAddSubmit (evt) {
-//     evt.preventDefault();
-//     renderItem();
-//     removePopupStatus(popupAdd);
-//     evt.target.reset();
-// };
-
-// formAddElement.addEventListener('submit', handleFormAddSubmit);
+});
 
 
 // старый код just in case (of emergency)
@@ -228,6 +210,16 @@ popupAddOpener.addEventListener('click', () => {
 // };
 // formProfileElement.addEventListener('submit', handleFormProfileSubmit); 
 //функция сабмита формы профиля
+
+// function handleFormAddSubmit (evt) {
+//     evt.preventDefault();
+//     renderItem();
+//     removePopupStatus(popupAdd);
+//     evt.target.reset();
+// };
+
+// formAddElement.addEventListener('submit', handleFormAddSubmit);
+// функция сабмита формы добавления новой карточки
 
 // popupCloseSigns.forEach((sign) => {
 //     const popup = sign.closest('.popup');
