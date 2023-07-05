@@ -7,7 +7,6 @@
     <meta name="description" content="Интерактивная страница для добавления фотографий, их удаления и лайков">
     <meta name="keyword" content="html, css, grid, grid-layout, javascript, adaptive web design, responsive web design">
     <meta name="author" content="Виктория Матынян">
-    <!-- <link rel="stylesheet" href="../src/pages/index.css"> -->
     <link rel="icon" href="data:;base64,="> <!-- убираю ошибку "Cannot GET /favicon.ico"-->
     <title lang="en">Mesto Russia</title>
 </head>
@@ -55,9 +54,9 @@
             <button class="popup__close-button" type="button"></button>
             <h3 class="popup__header">Новое место</h3>
             <form class="popup__input-form popup__input-form_type_add" name="placeAddForm" novalidate>
-                <input type="text" id="placeName-input" placeholder="Название" class="popup__input popup__input_type_place" name="placeInputName" required minlength="2" maxlength="30" autocomplete="off">
+                <input type="text" id="placeName-input" placeholder="Название" class="popup__input popup__input_type_place" name="name" required minlength="2" maxlength="30" autocomplete="off">
                 <span class="placeName-input-error popup__input-error"></span>
-                <input type="url" id="placeDescription-input" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link" name="placeInputDescription" required autocomplete="off">
+                <input type="url" id="placeDescription-input" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link" name="link" required autocomplete="off">
                 <span class="placeDescription-input-error popup__input-error"></span>
                 <button type="submit" class="popup__submit-button">Создать</button>
             </form>
@@ -82,14 +81,5 @@
             </figure>
         </div>
     </div>
-    <!-- <script type="module" src="../src/components/Section.js" ></script>
-    <script type="module" src="../src/components/Popup.js"></script>
-    <script type="module" src="../src/components/FormValidator.js"></script>
-    <script type="module" src="../src/components/Card.js"></script>
-    <script type="module" src="../src/components/PopupWithImage.js"></script>
-    <script type="module" src="../src/components/PopupWithForm.js"></script>
-    <script type="module" src="../src/components/UserInfo.js"></script>
-    <script type="module" src="../src/components/constants.js"></script> -->
-    <!-- <script type="module" src="../src/index.js"></script> -->
 </body>
 </html>

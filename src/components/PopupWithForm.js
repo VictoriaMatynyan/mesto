@@ -1,4 +1,4 @@
-import {formStateObj} from './constants.js';
+import {formStateObj} from '../utils/constants.js';
 import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
