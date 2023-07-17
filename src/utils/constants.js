@@ -16,6 +16,10 @@ const elementCards = document.querySelector('.elements');
 const popupImage = document.querySelector('.popup-image');
 const popupPicture = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
+const popupConfirmation = document.querySelector('.popup-confirm');
+const popupAvatarUpdate = document.querySelector('.popup-update');
+const formAvatarElement = document.querySelector('.popup__input-form_type_update');
+const popupInputAvatar = formAvatarElement.querySelector('.popup__input popup__input_type_update');
 
 const formStateObj = {
     formElement: '.popup__input-form',
@@ -60,5 +64,7 @@ const elements = [
     },
 ];
 
-export {popups, popupEdit, popupEditOpener, popupAdd, profileName, profileDescription, formProfileElement, popupInputName, popupInputDescription, formAddElement, popupInputPlace,
-    popupInputLink, popupAddOpener, elementCards, popupImage, popupPicture, popupCaption, closeButton, formStateObj, elements};
+export {popups, popupEdit, popupEditOpener, popupAdd, profileName, profileDescription, formProfileElement, 
+    popupInputName, popupInputDescription, formAddElement, popupInputPlace, popupInputLink, popupAddOpener, 
+    elementCards, popupImage, popupPicture, popupCaption, closeButton, formStateObj, elements, popupConfirmation,
+    popupAvatarUpdate, formAvatarElement, popupInputAvatar};

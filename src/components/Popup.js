@@ -27,10 +27,3 @@ export default class Popup {
         });
     }
 }
-
-//  this._popup.addEventListener('mousedown', (evt) => {
-//     if (evt.target === evt.currentTarget) {
-//         this.close();
-//         this._handleEscClose();
-//     }
-// });

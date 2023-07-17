@@ -1,11 +1,13 @@
 export default class Card {
-    constructor(data, templateSelector, {handleCardClick}) {
+    constructor(data, templateSelector, {handleCardClick, isOwn, handleCardDelete}) {
         this._name = data.name;
         this._link = data.link;
         this._img = null;
         this._likeButton = null;
         this._templateSelector = templateSelector;
         this._handleCardClick = handleCardClick;
+        this._isOwn = isOwn;  //булевый параметр для проверки моей/не моей карточки
+        this._handleCardDelete = handleCardDelete;
     }
 
     _getTemplate() {
@@ -15,7 +17,7 @@ export default class Card {
         .querySelector('.element')
         .cloneNode(true)
 
-        return elementTemplate
+        return elementTemplate;
     }
 
     generateCard() {
@@ -25,7 +27,6 @@ export default class Card {
         this._img.alt = this._name;
         this._likeButton = this._element.querySelector('.element__like-button');
         this._element.querySelector('.element__caption').textContent = this._name;
-
         this._setEventListeners();
 
         return this._element;
@@ -36,9 +37,12 @@ export default class Card {
             this._handleLikeCard();
         });
         
-        this._element.querySelector('.element__delete-button').addEventListener('click', () => {
-            this._handleDeleteCard();
-        });
+        //добавляю на функцию удаления карточки условие, чтобы удалялись только мои карточки
+        if(this._isOwn) {
+            this._element.querySelector('.element__delete-button').addEventListener('click', () => {
+                this._handleDeleteCard(); 
+            });
+        }
 
         this._img.addEventListener('click', () => {
             this._handleCardClick();
@@ -55,7 +59,6 @@ export default class Card {
         this._element = null;
     }
     
-
     _handleLikeCard() {
         this._likeButton.classList.toggle('element__like-button_active');
     }
