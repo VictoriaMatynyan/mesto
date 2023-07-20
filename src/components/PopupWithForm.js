@@ -7,6 +7,7 @@ export default class PopupWithForm extends Popup {
         this._handleFormSubmit = handleFormSubmit;
         this._popupForm = popup.querySelector('.popup__input-form');
         this._inputList = Array.from(this._popupForm.querySelectorAll(formStateObj.inputElement));
+        this._submitButton = popup.querySelector('.popup__submit-button');
     }
     
     //получаем значения всех полей формы
@@ -28,6 +29,7 @@ export default class PopupWithForm extends Popup {
         this._popupForm.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this._handleFormSubmit(this._getInputValues());
+            this._submitButton.textContent = 'Сохранение...';
         })
     }
 

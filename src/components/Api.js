@@ -1,4 +1,4 @@
-export default  class Api {
+export default class Api {
     constructor(options) {
         this.baseUrl = options.baseUrl;
         this.headers = options.headers
@@ -7,10 +7,20 @@ export default  class Api {
     //проверка ответа сервера на корректность
     _validateResponse(res) {
         if(res.ok) {
-            // console.log(`Значение 'res' в _validateResponse()=${res}`);
+            // console.log(`Значение data в removeCard Api.js ${res}`);
+            // console.log(`Значение data в removeCard Api.js ${JSON.stringify(res)}`);
             return res.json();
         } //в случае ошибки - отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`)
+        return Promise.reject(`Ошибка получения ответа от сервера: ${res.status}`)
+    }
+
+    getInitialCards() {
+        //возвращаем объект Promise через return fetch
+        return fetch(`${this.baseUrl}/cards`, {
+            method: 'GET',
+            headers: this.headers
+        })
+        .then(this._validateResponse.bind(this));
     }
 
     getUserInfo() {
@@ -18,24 +28,63 @@ export default  class Api {
             method: 'GET',
             headers: this.headers
         })
-        .then((res) => {
-            // console.log(res.json());
-            this._validateResponse(res);
-        })
+        .then(this._validateResponse.bind(this)); //явно указываем значение this, иначе теряется контекст
     }
 
-    // getInitialCards() {
-    //     //возвращаем объект Promise через return fetch
-    //     return fetch(`${this.baseUrl}/cards`, {
-    //         method: 'GET',
-    //         headers: this.headers
-    //     })
-    //     .then((res) => {
-    //         console.log(res.json())
-    //         // this._validateResponse(res);
-    //     })
-    //     .then((data) => {
-    //         console.log(data)
-    //     })
-    // }
+    editUserInfo(formValues) {
+        return fetch(`${this.baseUrl}/users/me`, {
+            method: 'PATCH',
+            headers: this.headers,
+            body: JSON.stringify({
+                name: formValues.name,
+                about: formValues.about
+            })
+        })
+        .then(this._validateResponse.bind(this));
+    }
+
+    editAvatar(avatar) {
+        return fetch(`${this.baseUrl}/users/me/avatar`, {
+            method: 'PATCH',
+            headers: this.headers,
+            body: JSON.stringify(avatar)
+        })
+        .then(this._validateResponse.bind(this));
+    }
+
+    likeCard(card) {
+        return fetch(`${this.baseUrl}/cards/${card._id}/likes`, {
+            method: 'PUT',
+            headers: this.headers,
+        })
+        .then(this._validateResponse.bind(this));
+    }
+
+    dislikeCard(card) {
+        return fetch(`${this.baseUrl}/cards/${card._id}/likes`, {
+            method: 'DELETE',
+            headers: this.headers,
+        })
+        .then(this._validateResponse.bind(this));
+    }
+
+    removeCard(cardItem) {
+        return fetch(`${this.baseUrl}/cards/${cardItem._id}`, {
+            method: 'DELETE',
+            headers: this.headers,
+        })
+        .then(this._validateResponse.bind(this));
+    }
+
+    addNewCard(data) {
+        return fetch(`${this.baseUrl}/cards`, {
+            method: 'POST',
+            headers: this.headers,
+            body: JSON.stringify({
+                name: data.name,
+                link: data.link
+            })
+        })
+        .then(this._validateResponse.bind(this));
+    }
 }
