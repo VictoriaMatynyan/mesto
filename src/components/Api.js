@@ -7,8 +7,8 @@ export default class Api {
     //проверка ответа сервера на корректность
     _validateResponse(res) {
         if(res.ok) {
-            // console.log(`Значение data в removeCard Api.js ${res}`);
-            // console.log(`Значение data в removeCard Api.js ${JSON.stringify(res)}`);
+            // console.log(`Значение res в likeCard Api.js ${res}`);
+            // console.log(`Значение res в dislikeCard Api.js ${JSON.stringify(res)}`);
             return res.json();
         } //в случае ошибки - отклоняем промис
         return Promise.reject(`Ошибка получения ответа от сервера: ${res.status}`)
@@ -52,16 +52,16 @@ export default class Api {
         .then(this._validateResponse.bind(this));
     }
 
-    likeCard(card) {
-        return fetch(`${this.baseUrl}/cards/${card._id}/likes`, {
+    likeCard(cardItem) {
+        return fetch(`${this.baseUrl}/cards/${cardItem._id}/likes`, {
             method: 'PUT',
             headers: this.headers,
         })
         .then(this._validateResponse.bind(this));
     }
 
-    dislikeCard(card) {
-        return fetch(`${this.baseUrl}/cards/${card._id}/likes`, {
+    dislikeCard(cardItem) {
+        return fetch(`${this.baseUrl}/cards/${cardItem._id}/likes`, {
             method: 'DELETE',
             headers: this.headers,
         })
