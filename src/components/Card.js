@@ -1,4 +1,3 @@
-import { handleLikeRequest, handleDislikeRequest } from '../pages/index.js'
 export default class Card {
     constructor(data, templateSelector, currentUser, callbacks) {
         this._data = data;
@@ -69,16 +68,12 @@ export default class Card {
         });
     }
 
-    _handleCardLike(cardItem) {
-        handleLikeRequest(cardItem)
-        .then((res) => this.handleLikeOperations(res))
-        .catch((err) => console.log(`Ошибка при лайке элемента: ${err}`));
+    _handleCardLike() {
+        handleLikeRequest(this._data);
     }
 
-    _handleCardDislike(cardItem) {
-        handleDislikeRequest(cardItem)
-        .then((res) => this.handleLikeOperations(res))
-        .catch((err) => console.log(`Ошибка при дислайке элемента: ${err}`));
+    _handleCardDislike() {
+        handleDislikeRequest(this._data);
     }
 
     //метод нужен для счётчика лайков, иначе функция будет огромной
@@ -96,122 +91,4 @@ export default class Card {
           this._likesCounter.textContent = parseInt(this._likesCounter.textContent) + 1;
         }
     }
-
-   
-    
-
-    // неудачные попытки
-    // checkMyLike() {
-    //     return this._likes.some((myLike) => {
-    //         return myLike._id === this._currentUser;
-    //     }); //some возвращает true / false
-    // }
-
-    //some возвращает true/false
-    // checkLikeButton() {
-    //     if (Array.isArray(this._likes) && this._likes.some((myLike) => myLike._id === this._currentUserId)) { //если true, закрашиваем лайк
-    //         this._likeButton.classList.add('element__like-button_active');
-    //         console.log(`currentUserId = ${this._currentUserId}`)
-    //     } else {
-    //         this._likeButton.classList.remove('element__like-button_active');
-    //     }
-    // } 
-    // // checkLikeButton() {
-    // //     if (this._likes.some((myLike) => myLike._id === this._currentUser)) { //если true, закрашиваем лайк
-    // //         this._likeButton.classList.add('element__like-button_active');
-    // //         console.log(`currentUser = ${this._currentUser}`)
-    // //     } else {
-    // //         this._likeButton.classList.remove('element__like-button_active');
-    // //     }
-    // // } 
-     //устанавливаю геттер, чтобы во внешнем коде значение isLiked стало свойством объекта
-    // get isLiked() {
-    //     return this._isLiked;
-    // }
-    // handleLikeCard(cardLikes) {
-    //     this._likes = Array.from(cardLikes);
-    //     console.log(`Значение this._likes = ${this._likes}`);
-    //     this._likesCounter.textContent = this._likes.length;
-    //     this._checkLikeButton();
-
-    //     // if (this.checkLikeButton()) {
-    //     //     // this._likeButton.classList.remove('element__like-button_active');
-    //     //     this._likesCounter.textContent = this._likes.length - 1; 
-    //     // } else {
-    //     //     // this._likeButton.classList.add('element__like-button_active');
-    //     //     this._likesCounter.textContent = this._likes.length + 1;
-    //     //     }
-    //     // }
-    // }
 }
-// checkMyLike() {
-    //     if (this._likes.some((item) => item._id === this._currentUserId)) {
-    //         console.log(this._likes);
-    //         this._deleteButton.classList.add('element__like-button_active');
-    //     } //some возвращает true / false
-    // }
-
-    // _checkLikeButton() {
-    //     return this._likeButton.classList.contains('element__like-button_active');
-    // } // return возвращает true / false
-   
-
-    // handleLikeCard(cardItem) {
-    //     this._likes = cardItem.likes;
-
-    //     if (this._checkLikeButton()) {
-    //         this._likeButton.classList.remove('element__like-button_active');
-    //         this._likesCounter.textContent = this._likes.length - 1; 
-    //     } else {
-    //         this._likeButton.classList.add('element__like-button_active');
-    //         if (this._userId === this._currentUserId) {
-    //             this._likesCounter.textContent = this._likes.length + 1;
-    //         } else { 
-    //             this._likesCounter.textContent = this._likes.length;
-    //         }
-    //     }
-    // }
-    // handleLikeCard() {
-    //     this._isLiked = !this._isLiked;
-    //     if (this._isLiked) {
-    //         this._likeButton.classList.add('element__like-button_active');
-    //         this._likesCounter.textContent = this._likes.length + 1; //если isLiked = true, увеличиваем счётчик лайков на 1
-    //     } else {
-    //         this._likeButton.classList.remove('element__like-button_active');
-    //         if (this._likes.length === 1 && this._userId === this._currentUserId) {
-    //             this._likesCounter.textContent = this._likes.length - 1;
-    //         } else { 
-    //             this._likesCounter.textContent = this._likes.length; //если isLiked = false, то -1 лайк
-    //         }
-    //     }
-    // }
-    // handleLikeCard() {
-    //     if (this._isLiked = !this._isLiked) {
-    //         this._likeButton.classList.add('element__like-button_active');
-    //         this._likesCounter.textContent = this._likes.length + 1; //если isLiked = true, увеличиваем счётчик лайков на 1
-    //     } else if (this._isLiked && this._likes.length === 1) {
-    //         this._likeButton.classList.remove('element__like-button_active');
-    //         this._likesCounter.textContent = parseInt('0');
-    //     } else {
-    //         this._likeButton.classList.remove('element__like-button_active');
-    //         this._likesCounter.textContent = this._likes.length - 1; //если isLiked = false, то -1 лайк
-    //     }
-    // }
-    
-    // _handleOpenImagePopup() {
-    //     this._handleCardClick(this._name, this._link);
-    // }
-     
-    // //метод нужен для счётчика лайков, иначе функция будет огромной
-    // checkLikeButton() {
-    //     return this._likeButton.classList.add('element__like-button_active');
-    // }
-    
-    // updateLikesNumber(cardLikes) {
-    //     this._likes = cardLikes;
-    //     this._likesCounter.textContent = this._likes.length;
-    // }
-
-    // updateLikeBtnState() {
-    //     this._isLiked = !this._isLiked;
-    // }

@@ -31,40 +31,6 @@ const formStateObj = {
     errorElement: 'popup__input-error'
 };
 
-// const imageCanada = new URL('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', import.meta.url);
-// const imageIreland = new URL('https://images.unsplash.com/photo-1527995145077-f35025789549?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', import.meta.url);
-// const imageIceland = new URL('https://images.unsplash.com/photo-1504829857797-ddff29c27927?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', import.meta.url);
-// const imageSwitzerland = new URL('https://images.unsplash.com/photo-1508166093217-f35d00c95fca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80', import.meta.url);
-// const imageFaroeIslands = new URL('https://images.unsplash.com/photo-1610962427218-1d6878a96662?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', import.meta.url);
-// const imageUsa = new URL('https://images.unsplash.com/photo-1456425712190-0dd8c2b00156?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', import.meta.url);
-
-// const elements = [
-//     {
-//         name: 'Озеро Морейн, Канада',
-//         link: imageCanada
-//     },
-//     {
-//         name: 'Утёсы Мохер, Ирландия',
-//         link: imageIreland
-//     },
-//     {
-//         name: 'Вик, Исландия',
-//         link: imageIceland
-//     },
-//     {
-//         name: 'Лаутербруннен, Швейцария',
-//         link: imageSwitzerland
-//     },
-//     {
-//         name: 'Фарерские острова',
-//         link: imageFaroeIslands
-//     },
-//     {
-//         name: 'Гранд-Каньон, США',
-//         link: imageUsa
-//     },
-// ];
-
 export {popups, popupEdit, popupEditOpener, popupAdd, profileName, profileDescription, formProfileElement, 
     popupInputName, popupInputDescription, formAddElement, popupInputPlace, popupInputLink, popupAddOpener, 
     elementCards, popupImage, popupPicture, popupCaption, closeButton, formStateObj, popupUpdateButton,

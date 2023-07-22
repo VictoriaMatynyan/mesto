@@ -8,7 +8,7 @@ export default class Section {
         this._containerSelector.prepend(element);
     }
 
-    addItem(items) {
+    renderItems(items) {
         items.reverse();
         items.forEach((item) => {
             this._renderer(item);

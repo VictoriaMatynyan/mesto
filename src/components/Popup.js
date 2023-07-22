@@ -26,8 +26,4 @@ export default class Popup {
             }
         });
     }
-    
-    savingData(text) {
-        this._submitButton.textContent = text;
-    }
 }

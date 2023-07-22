@@ -46,7 +46,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
         items: cardsData,
         renderer: (items) => elementList.setItem(createCard(items))
     }, elementCards);
-    elementList.addItem(cardsData);
+    elementList.renderItems(cardsData);
 })
 .catch((err) => {
     console.log(`Ошибка загрузки данных с сервера: ${err}`);
@@ -58,6 +58,7 @@ function handleDeleteClick(cardItem, cardElement) {
         //вызываю метод удаления карточки из экз-ра класса Section
         elementList.handleDeleteCard(cardElement);
         popupWithConfirmation.close();
+
     })
     .catch((err) => {
         console.log(`Ошибка при удалении элемента: ${err}`);
@@ -67,7 +68,6 @@ function handleDeleteClick(cardItem, cardElement) {
 
 const popupWithConfirmation = new PopupWithConfirmation(popupConfirmation, handleDeleteClick);
 popupWithConfirmation.setEventListeners();
-
 
 export function handleLikeRequest(cardItem) {
     return api.likeCard(cardItem);
@@ -128,12 +128,12 @@ const avatarUpdate = new PopupWithForm(popupAvatarUpdate, {
         api.editAvatar({avatar: popupInputAvatar.value})
         .then((res) => {
             userInfo.setUserAvatar(res.avatar);
+            avatarUpdate.close();
         })
         .catch((err) => {
             console.log(`Ошибка загрузки аватара: ${err}`);
         })
         .finally(() => {
-            avatarUpdate.close();
             avatarUpdate.savingData('Сохранить');
         })
     }
@@ -153,12 +153,12 @@ const newCardPopup = new PopupWithForm(popupAdd, {
         })
         .then((item) => {
         elementList.setItem(createCard(item));
+        newCardPopup.close();
         })
         .catch((err) => {
             console.log(`Ошибка при загрузке новой карточки: ${err}`)
         })
         .finally(() => {
-        newCardPopup.close();
         newCardPopup.savingData('Сохранить');
         })
     }
@@ -169,48 +169,3 @@ popupAddOpener.addEventListener('click', () => {
     newCardPopup.open();
     formAddValidator.setFormState();
 });
-
-// Previous code (just in case)
-// function createCard(data) {
-//     // создаём экземпляр класса
-//     const card = new Card(data, '.element-template', {
-//         handleCardClick: () => popupWithImage.open(data.name, data.link)            
-//     });
-//     const newCardElement = card.generateCard();
-//     return newCardElement
-// }
-
-// const elementList = new Section({
-//     items: [],
-//     renderer: (items) => {
-//         items.forEach((item) => {
-//         elementList.setItem(createCard(item))
-//     })
-//     }
-// }, elementCards);
-    
-    // function createCard(cardItem) {
-    //     const card = new Card(cardItem, '.element-template', currentUser, {
-    //         handleCardClick: (cardItem) => popupWithImage.open(cardItem.name, cardItem.link),
-    //         handleCardLike: () => handleLikeOperations(cardItem, card),
-    //         handleCardDelete: popupWithConfirmation.open.bind(popupWithConfirmation)
-    //     }); 
-    //     return card.generateCard();
-    // }
-    // function createCard(cardItem) {
-//     const card = new Card(cardItem, '.element-template', currentUser, {
-//         handleCardClick: (cardItem) => popupWithImage.open(cardItem.name, cardItem.link),
-//         handleCardLike: (cardItem) => { 
-//             api.likeCard(cardItem)
-//             .then((res) => card.handleLikeOperations(res))
-//             .catch((err) => console.log(`Ошибка при лайке элемента: ${err}`))
-//         },
-//         handleCardDislike: (cardItem) => {
-//             api.dislikeCard(cardItem)
-//             .then((res) => card.handleLikeOperations(res))
-//             .catch((err) => console.log(`Ошибка при дизлайке элемента: ${err}`))
-//         },
-//         handleCardDelete: popupWithConfirmation.open.bind(popupWithConfirmation)
-//     }); 
-//     return card.generateCard();
-// }
