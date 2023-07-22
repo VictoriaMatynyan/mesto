@@ -7,8 +7,6 @@ export default class Api {
     //проверка ответа сервера на корректность
     _validateResponse(res) {
         if(res.ok) {
-            // console.log(`Значение res в likeCard Api.js ${res}`);
-            // console.log(`Значение res в dislikeCard Api.js ${JSON.stringify(res)}`);
             return res.json();
         } //в случае ошибки - отклоняем промис
         return Promise.reject(`Ошибка получения ответа от сервера: ${res.status}`)

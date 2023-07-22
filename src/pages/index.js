@@ -68,19 +68,27 @@ function handleDeleteClick(cardItem, cardElement) {
 const popupWithConfirmation = new PopupWithConfirmation(popupConfirmation, handleDeleteClick);
 popupWithConfirmation.setEventListeners();
 
+
+export function handleLikeRequest(cardItem) {
+    return api.likeCard(cardItem);
+}
+
+export function handleDislikeRequest(cardItem) {
+    return api.dislikeCard(cardItem);
+}
+
 function createCard(cardItem) {
     const card = new Card(cardItem, '.element-template', currentUser, {
         handleCardClick: (cardItem) => popupWithImage.open(cardItem.name, cardItem.link),
         handleCardLike: (cardItem) => { 
-            // console.log(`cardItem = ${JSON.stringify(cardItem)}`) //передается id карточки
-            api.likeCard(cardItem)
+            handleLikeRequest(cardItem)
             .then((res) => card.handleLikeOperations(res))
             .catch((err) => console.log(`Ошибка при лайке элемента: ${err}`))
         },
         handleCardDislike: (cardItem) => {
-            api.dislikeCard(cardItem)
+            handleDislikeRequest(cardItem)
             .then((res) => card.handleLikeOperations(res))
-            .catch((err) => console.log(`Ошибка при дизлайке элемента: ${err}`))
+            .catch((err) => console.log(`Ошибка при дислайке элемента: ${err}`))
         },
         handleCardDelete: popupWithConfirmation.open.bind(popupWithConfirmation)
     }); 
@@ -180,3 +188,29 @@ popupAddOpener.addEventListener('click', () => {
 //     })
 //     }
 // }, elementCards);
+    
+    // function createCard(cardItem) {
+    //     const card = new Card(cardItem, '.element-template', currentUser, {
+    //         handleCardClick: (cardItem) => popupWithImage.open(cardItem.name, cardItem.link),
+    //         handleCardLike: () => handleLikeOperations(cardItem, card),
+    //         handleCardDelete: popupWithConfirmation.open.bind(popupWithConfirmation)
+    //     }); 
+    //     return card.generateCard();
+    // }
+    // function createCard(cardItem) {
+//     const card = new Card(cardItem, '.element-template', currentUser, {
+//         handleCardClick: (cardItem) => popupWithImage.open(cardItem.name, cardItem.link),
+//         handleCardLike: (cardItem) => { 
+//             api.likeCard(cardItem)
+//             .then((res) => card.handleLikeOperations(res))
+//             .catch((err) => console.log(`Ошибка при лайке элемента: ${err}`))
+//         },
+//         handleCardDislike: (cardItem) => {
+//             api.dislikeCard(cardItem)
+//             .then((res) => card.handleLikeOperations(res))
+//             .catch((err) => console.log(`Ошибка при дизлайке элемента: ${err}`))
+//         },
+//         handleCardDelete: popupWithConfirmation.open.bind(popupWithConfirmation)
+//     }); 
+//     return card.generateCard();
+// }

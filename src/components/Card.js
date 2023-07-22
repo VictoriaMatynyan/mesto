@@ -1,16 +1,15 @@
+import { handleLikeRequest, handleDislikeRequest } from '../pages/index.js'
 export default class Card {
     constructor(data, templateSelector, currentUser, callbacks) {
         this._data = data;
         this._name = this._data.name;
         this._link = this._data.link;
-        this._cardId = data._id; //получаем доступ к id карточки
         this._userId = data.owner._id; //получаем доступ к свойству id в свойстве owner у объекта (мой id)
         this._currentUserId = currentUser._id; //id для проверки наличия моего лайка
         this._currentUser = currentUser;
         this._likes = data.likes; //массив пользователей, лайкнувших карточку
         this._img = null;
         this._templateSelector = templateSelector;
-
         //собираю все колбэки в один объект (в будущем их может стать ещё больше)
         this._handleCardClick = callbacks.handleCardClick;
         this._handleCardLike = callbacks.handleCardLike;
@@ -38,8 +37,8 @@ export default class Card {
         this._likeButton = this._element.querySelector('.element__like-button');
         this._likesCounter = this._element.querySelector('.element__likes-counter');
         //проверка на наличие моего лайка
-        if (this._likes.some((item) => item._id === this._currentUserId)) {
-            this._deleteButton.classList.add('element__like-button_active');
+        if (this._likes.some((item) => item._id === this._currentUser)) {
+            this._likeButton.classList.add('element__like-button_active');
         }
         //делаем иконку удаления только на моих карточках сразу при их генерации
         if (this._userId !== this._currentUser) {
@@ -59,9 +58,9 @@ export default class Card {
 
         this._likeButton.addEventListener('click', () =>{
             if (this._checkLikeButton()) {
-                this._handleCardDislike(this._cardId);
+                this._handleCardDislike(this._data);
             } else {
-                this._handleCardLike(this._cardId); //this._cardId
+                this._handleCardLike(this._data);
             }
         });
         
@@ -69,22 +68,37 @@ export default class Card {
             this._handleCardDelete(this._data, this._element);
         });
     }
-    
+
+    _handleCardLike(cardItem) {
+        handleLikeRequest(cardItem)
+        .then((res) => this.handleLikeOperations(res))
+        .catch((err) => console.log(`Ошибка при лайке элемента: ${err}`));
+    }
+
+    _handleCardDislike(cardItem) {
+        handleDislikeRequest(cardItem)
+        .then((res) => this.handleLikeOperations(res))
+        .catch((err) => console.log(`Ошибка при дислайке элемента: ${err}`));
+    }
+
     //метод нужен для счётчика лайков, иначе функция будет огромной
     _checkLikeButton() {
         return this._likeButton.classList.contains('element__like-button_active');
     }
-    
+
     handleLikeOperations(cardItems) {
         this._likes = cardItems.likes;
         if (this._checkLikeButton()) {
-          this._likeButton.classList.remove('element__like-button_active');
-          this._likesCounter.textContent = parseInt(this._likesCounter.textContent) - 1;
+            this._likeButton.classList.remove('element__like-button_active');
+            this._likesCounter.textContent = parseInt(this._likesCounter.textContent) - 1;
         } else {
           this._likeButton.classList.add('element__like-button_active');
-          this._likesCounter.textContent = parseInt(this._likesCounter.textContent) + 1; //this._likes.length +- 1 не работает
+          this._likesCounter.textContent = parseInt(this._likesCounter.textContent) + 1;
         }
     }
+
+   
+    
 
     // неудачные попытки
     // checkMyLike() {
@@ -110,7 +124,10 @@ export default class Card {
     // //         this._likeButton.classList.remove('element__like-button_active');
     // //     }
     // // } 
-   
+     //устанавливаю геттер, чтобы во внешнем коде значение isLiked стало свойством объекта
+    // get isLiked() {
+    //     return this._isLiked;
+    // }
     // handleLikeCard(cardLikes) {
     //     this._likes = Array.from(cardLikes);
     //     console.log(`Значение this._likes = ${this._likes}`);
@@ -183,4 +200,18 @@ export default class Card {
     
     // _handleOpenImagePopup() {
     //     this._handleCardClick(this._name, this._link);
+    // }
+     
+    // //метод нужен для счётчика лайков, иначе функция будет огромной
+    // checkLikeButton() {
+    //     return this._likeButton.classList.add('element__like-button_active');
+    // }
+    
+    // updateLikesNumber(cardLikes) {
+    //     this._likes = cardLikes;
+    //     this._likesCounter.textContent = this._likes.length;
+    // }
+
+    // updateLikeBtnState() {
+    //     this._isLiked = !this._isLiked;
     // }
